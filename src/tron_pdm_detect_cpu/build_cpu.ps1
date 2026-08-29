@@ -1,4 +1,4 @@
-# C:\Users\ioten\e2_studio\workspace\tron_pdm_detect_cpu\build_cpu.ps1
+# ${workspace_loc:/tron_pdm_detect_cpu}\build_cpu.ps1
 # C++ / C compiler build script for EK-RA8P1
 
 Write-Host "Starting EK-RA8P1 CPU Project Build..." -ForegroundColor Cyan
