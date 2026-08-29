@@ -348,9 +348,18 @@ The AI applications (Audio, Motion Sensor, and Image) included in this repositor
 1. **Model Training & Retrieval (Edge Impulse)**:
    * By leveraging the **[Edge Impulse](https://www.edgeimpulse.com/)** platform, **advanced edge AI models including object detection (such as FOMO), voice keyword spotting, and motion gesture classification can be easily created and validated via a user-friendly web GUI.**
    * Execute preprocessing (DSP), training, and full integer `int8` quantization on Edge Impulse Studio. Download the optimized model as a standard `.tflite` file.
+
+   ##### Edge Impulse Model Retrieval Example:
+   ![model1](img/model1.png)
+
 2. **Local Model Conversion (MERA Translator)**:
    * Place the `.tflite` model into the dedicated translation project folder under e² studio. Run the Renesas **MERA (Model Extension for Renesas Architecture) Translator**.
    * The MERA compiler partitions the model into NPU (Ethos-U55) and CPU (fallback) subgraphs, generating NPU command arrays (`sub_0001_command_stream.c`), weight/bias arrays (`sub_0001_model_data.c`), and standard loading wrappers (`model.c` / `model.h`).
+
+   ##### MERA Translator Translation & Output Files:
+   ![model1](img/model1.png)
+   ![model3](img/model3.png)
+
 3. **Firmware Integration (μT-Kernel 3.0)**:
    * Copy the generated C source files directly into the project's `application/` folder.
    * Call the clean MERA API **`RunModel(false)`** from the user application (`usermain.cpp`) to execute NPU inferences inside real-time RTOS tasks.

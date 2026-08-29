@@ -350,9 +350,18 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 1. **Edge Impulse でのモデル開発と取得**:
    * **[Edge Impulse](https://www.edgeimpulse.com/)** プラットフォームを利用することで、**物体検出（FOMOなど）、音声認識、モーション検出（加速度ジェスチャなど）といった高度なエッジAIモデルを直観的なGUI上で簡単に作成・検証できます。**
    * Edge Impulse Studio 上でデータの前処理、学習、および `int8` (8ビット符号付き整数) へのフル整数量子化を行い、学習済みモデルファイル（`*.tflite`）として直接ダウンロードします。
+
+   ##### Edge Impulse でのモデル取得・ダウンロード例：
+   ![model1](img/model1.png)
+
 2. **MERA Translator によるローカルモデル変換**:
    * e² studio の AIモデル変換プロジェクト（ワークスペース）に `*.tflite` ファイルを配置し、ルネサス公式の **MERA (Model Extension for Renesas Architecture) Translator** を実行して変換を行います。
    * MERAコンパイラは、TFLiteモデルを解析して NPU (Ethos-U55) 用のサブグラフと CPU (フォールバック) 用のサブグラフに分割し、NPU命令のコマンド配列（`sub_0001_command_stream.c`）や重みバイアス配列（`sub_0001_model_data.c`）、およびロード用の `model.c` / `model.h` を自動生成します。
+
+   ##### MERA Translator でのモデル変換と出力ファイル群：
+   ![model1](img/model1.png)
+   ![model3](img/model3.png)
+
 3. **μT-Kernel 3.0 実機プロジェクトへの取り込み**:
    * 生成された軽量な C言語ソースファイル群（`.c` / `.h`）を、ファームウェアプロジェクトの `application/` フォルダ配下にコピーして統合します。
    * アプリケーションコード（`usermain.cpp` 等）からは、MERA API である **`RunModel(false)`** を直接呼び出すことで、リアルタイムOSタスクからNPUを駆動します。
