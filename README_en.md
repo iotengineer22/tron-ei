@@ -342,6 +342,12 @@ Offloading and deploying manual models to the Ethos-U55 NPU typically involves t
 
 The combined "Edge Impulse × Renesas RUHMI" pipeline accelerates development and lowers entry barriers through a clean division of labor:
 
+##### Platform Division of Labor & Pipeline Architecture:
+![diagram_ruhmi_synergy_en](img/diagram_ruhmi_synergy_en.png)
+
+##### Development Platform Coverage & Benefits:
+![table_ruhmi_synergy_en](img/table_ruhmi_synergy_en.png)
+
 * **Edge Impulse (Model Design & Automated NPU Compilation)**:
   Handles dataset management, labeling, feature extraction (DSP), and model training entirely through an intuitive web GUI. It automatically verifies NPU operator compatibility and compiles the model using Vela in the cloud, exporting production-ready C++ classes in seconds.
 * **Renesas RUHMI / FSP (Hardware Infrastructure Protection & Abstraction)**:
