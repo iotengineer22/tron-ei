@@ -109,7 +109,7 @@ To prevent race conditions between tasks, the middleware implements atomic data 
 To evaluate NPU performance gains, a baseline version running inference strictly on the Cortex-M85 CPU (via TFLite Micro CPU execution) was compiled and benchmarked against the NPU-accelerated firmware.
 
 * **AI Inference Speed Benchmark (CPU vs Ethos-U55 NPU)**:
-  * **Voice Keyword Spotting (1-second window)**: Shrunk from 11.2 ms on the CPU to **~3 ms on the NPU (3.7x Speedup)**.
+  * **Voice Keyword Spotting (1-second window)**: Shrunk from **0.596 ms** on the CPU to **0.235 ms on the NPU (2.5x Speedup)**.
   * **FOMO Object Detection (PCB Components)**: Shrunk from 278 ms on the CPU to **~5 ms on the NPU (55.6x Speedup)**.
 
 ![CPU vs NPU AI Inference Benchmark](img/cpu_vs_npu_comparison.png)
@@ -195,7 +195,7 @@ extern "C" void pdm_callback(pdm_callback_args_t *p_args)
 ```
 
 #### 1-3. Console Output Logs
-Initializes the Ethos-U55 NPU driver. Inference completes in **~3 ms** (3021 microseconds).
+Initializes the Ethos-U55 NPU driver. Inference completes in **0.235 ms** (235 microseconds).
 ```text
 Start User-main program (Voice Spotting via Ethos-U55 NPU).
 Initializing Ethos-U55 NPU...
@@ -204,10 +204,10 @@ Start Audio Capture (PDM)...
 PDM Digital Mic initialized.
 
 [AI Inference] Audio frame ready for classification.
-Inference timing: 3021 us.
+Inference timing: 235 us.
 NN Result: up (91.2%)
 [AI Inference] Audio frame ready for classification.
-Inference timing: 2989 us.
+Inference timing: 230 us.
 NN Result: down (88.7%)
 ```
 

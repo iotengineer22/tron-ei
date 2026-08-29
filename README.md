@@ -111,7 +111,7 @@ Edge Impulse が要求する以下のシステム機能を、μT-Kernel 3.0 の�
 重いAI推論処理をマイコン内蔵の専用アクセラレータ（NPU）へオフロードすることで、CPU単体での演算実行時に比べて圧倒的なリアルタイム性能向上を達成していることを証明しました。
 
 * **実機測定によるNPU高速化ベンチマーク効果 (CPU実行 vs NPU実行)**:
-  * **音声キーワード認識 (1秒データ)**: CPU上で 11.2 ms であった推論時間を、NPUを用いることで **約 3 ms（約3.7倍の高速化）** に短縮。
+  * **音声キーワード認識 (1秒データ)**: CPU上で **0.596 ms** であった推論時間を、NPUを用いることで **0.235 ms（約2.5倍の高速化）** に短縮。
   * **FOMO部品検出 (画像入力)**: CPU上で 278 ms を要していた推論を、NPUを用いて **約 5 ms（約55.6倍の高速化）** に短縮。
 
 ![CPU vs NPU AI推論速度比較](img/cpu_vs_npu_comparison.png)
@@ -197,7 +197,7 @@ extern "C" void pdm_callback(pdm_callback_args_t *p_args)
 ```
 
 #### 1-3. 実行時のシリアル出力ログ例
-起動時に Ethos-U55 NPUドライバが初期化され、NPUによる推論時間がわずか **約 3 ms**（3021マイクロ秒）で完了していることが確認できます。
+起動時に Ethos-U55 NPUドライバが初期化され、NPUによる推論時間がわずか **0.235 ms**（235マイクロ秒）で完了していることが確認できます。
 ```text
 Start User-main program (Voice Spotting via Ethos-U55 NPU).
 Initializing Ethos-U55 NPU...
@@ -206,10 +206,10 @@ Start Audio Capture (PDM)...
 PDM Digital Mic initialized.
 
 [AI Inference] Audio frame ready for classification.
-Inference timing: 3021 us.
+Inference timing: 235 us.
 NN Result: up (91.2%)
 [AI Inference] Audio frame ready for classification.
-Inference timing: 2989 us.
+Inference timing: 230 us.
 NN Result: down (88.7%)
 ```
 

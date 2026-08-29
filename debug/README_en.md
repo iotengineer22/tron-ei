@@ -170,7 +170,7 @@ Details and verification guidelines for each flashed SREC program:
   * Speak English keywords **`"up"`, `"down"`, `"left"`, `"right"`** clearly toward the board.
   * Upon detection, the recognized word and confidence rating (%) show up at the center of the display (ambient noises filter out as `"noise"`).
 * **NPU Acceleration Details**:
-  * MFCC audio feature extraction and classifier inference execute on the Ethos-U55 NPU in **~3 ms to 5 ms** (note that inference is performed using a 1-second audio data window).
+  * MFCC audio feature extraction and classifier inference execute on the Ethos-U55 NPU in **~3 ms to 5 ms** (pure NPU inference time is **0.235 ms**; note that inference is performed using a 1-second audio data window).
   * By decoupling the DMA audio stream collection from the neural network task using μT-Kernel's task priority mechanisms, the audio stream remains smooth without packet dropouts.
 * **Demo Video**:
   * [YouTube Link (https://youtu.be/TzLTbjDPGcE)](https://youtu.be/TzLTbjDPGcE)
