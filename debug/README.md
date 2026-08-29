@@ -175,7 +175,8 @@ PCとボードを接続し、プロジェクトを作成してプログラムを
   * 音声サンプリング用のDMA割り込み処理とAI推論タスクがμT-Kernelの優先度制御で完全に分離されているため、高負荷な推論中も「音飛び（フレーム欠損）」が発生しない高信頼なオーディオ処理を実現しています。
 * **実機デモ動画**:
   * [YouTubeリンク (https://youtu.be/TzLTbjDPGcE)](https://youtu.be/TzLTbjDPGcE)
-  [![Voice Keyword Spotting with Ethos-U55 NPU on RTOS](https://img.youtube.com/vi/TzLTbjDPGcE/hqdefault.jpg)](https://youtu.be/TzLTbjDPGcE)
+    
+    [![Voice Keyword Spotting with Ethos-U55 NPU on RTOS](https://img.youtube.com/vi/TzLTbjDPGcE/hqdefault.jpg)](https://youtu.be/TzLTbjDPGcE)
 
 ### ② 3軸加速度ジェスチャ認識エッジAI (`tron_i2c_detect.srec`)
 * **動作・デモ**:
@@ -191,7 +192,8 @@ PCとボードを接続し、プロジェクトを作成してプログラムを
   * 加速度センサーの104Hz等間隔サンプリングを確実に行うための「周期ディレイ補正アルゴリズム」が組み込まれており、RTOSの時間管理ジッタを最小限に抑えています。
 * **実機デモ動画**:
   * [YouTubeリンク (https://youtu.be/WUY36R_HQLQ)](https://youtu.be/WUY36R_HQLQ)
-  [![I2C Accelerometer Motion Detection on EK-RA8P1](https://img.youtube.com/vi/WUY36R_HQLQ/hqdefault.jpg)](https://youtu.be/WUY36R_HQLQ)
+    
+    [![I2C Accelerometer Motion Detection on EK-RA8P1](https://img.youtube.com/vi/WUY36R_HQLQ/hqdefault.jpg)](https://youtu.be/WUY36R_HQLQ)
 
 ### ③ FOMO基板部品検出 NPU高速版 (`tron_edge_fomo_npu_type.srec`)
 > [!NOTE]
@@ -204,7 +206,8 @@ PCとボードを接続し、プロジェクトを作成してプログラムを
   * 通常CPUで 278ms かかる推論を、NPUを用いて **約5ms** へと超高速化。複数オブジェクトの瞬間的なカウント追従を実現しています。
 * **実機デモ動画**:
   * [YouTubeリンク (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
-  [![PCB Object Detection using Ethos-U55 NPU](https://img.youtube.com/vi/_uKRamoLaNA/hqdefault.jpg)](https://youtu.be/_uKRamoLaNA)
+    
+    [![PCB Object Detection using Ethos-U55 NPU](https://img.youtube.com/vi/_uKRamoLaNA/hqdefault.jpg)](https://youtu.be/_uKRamoLaNA)
 
 ---
 
