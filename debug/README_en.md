@@ -205,6 +205,11 @@ Details and verification guidelines for each flashed SREC program:
   * [YouTube Link (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
   [![PCB Object Detection using Ethos-U55 NPU](https://img.youtube.com/vi/_uKRamoLaNA/hqdefault.jpg)](https://youtu.be/_uKRamoLaNA)
 
+---
+
+### [Verification & Reference Programs]
+The following applications (④ to ⑥) are intended for standalone peripheral verification or CPU comparison. Please flash and check them as needed.
+
 ### ④ I2C Sensor Reading & 2D Graphics (`base_firmware/tron_i2c_d2_test.srec`)
 * **Operation & Demo**:
   * Tilt and shake the accelerometer to watch live G-force wave plots (307 data points) for X (yellow), Y (red), and Z (blue) axes scroll across the LCD.

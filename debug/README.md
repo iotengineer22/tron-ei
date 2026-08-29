@@ -206,6 +206,11 @@ PCとボードを接続し、プロジェクトを作成してプログラムを
   * [YouTubeリンク (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
   [![PCB Object Detection using Ethos-U55 NPU](https://img.youtube.com/vi/_uKRamoLaNA/hqdefault.jpg)](https://youtu.be/_uKRamoLaNA)
 
+---
+
+### 【検証・参考プログラム】
+これ以降（④〜⑥）のプログラムは、周辺デバイスの単体動作確認や、NPUの性能比較を行うための検証・参考プログラムです。必要に応じて個別に書き込んで動作をご確認ください。
+
 ### ④ 3軸加速度センサー高速ビジュアライザ (`base_firmware/tron_i2c_d2_test.srec`)
 * **動作・デモ**:
   * MPU-6050センサーを傾けたり振ったりすると、X軸（黄色）、Y軸（赤色）、Z軸（青色）の加速度Gのリアルタイム波形（307点）が液晶画面上に高速スクロール描画されます。
