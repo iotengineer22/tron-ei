@@ -367,10 +367,10 @@ The AI applications (Audio, Motion Sensor, and Image) included in this repositor
 ##### Development Platform Coverage & Benefits:
 ![table_ruhmi_synergy_en](img/table_ruhmi_synergy_en.png)
 
-* **Edge Impulse (Model Design & Preprocessing)**:
-  Provides a code-free web GUI for dataset management, DSP tuning, and quantization, exporting verified TFLite models with zero compiler conflicts.
-* **Renesas RUHMI / FSP / MERA (Local Optimization & Hardware Protection)**:
-  Converts standard TFLite models into highly efficient NPU binary commands, linking them with RTOS (μT-Kernel 3.0) tasks and peripherals while resolving critical low-level settings (memory alignment, cache synchronization).
+* **Edge Impulse (Model Design)**:
+  Handles dataset training and quantization via a user-friendly GUI to easily output high-quality TFLite models.
+* **Renesas RUHMI / FSP / MERA (Target Optimization)**:
+  Safely integrates the MERA-translated local code with the RTOS (μT-Kernel 3.0), running NPU inferences without memory errors.
 
 This platform synergy ensures that developers can **focus on rapid AI model iterations via Edge Impulse while relying on RUHMI/FSP/MERA to manage complex memory layouts and RTOS scheduling**, reducing time-to-market from months to days.
 
