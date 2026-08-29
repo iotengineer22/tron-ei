@@ -284,11 +284,6 @@ NN Result: flick (89.1%)
 #### 3-1. Technical Details
 Validates the Edge Impulse FOMO (Faster Objects, More Objects) model on the Ethos-U55 NPU to identify and locate multiple tiny electronic components (Pico, Xiao) on a PCB in real-time. (Check is optional if already verified in the NPU app repository).
 
-* **Demo Video**: [YouTube Link (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
-
-##### FOMO Component Detection Demo Screen:
-![tron_fomo5](img/tron_fomo5.png)
-![tron_fomo6](img/tron_fomo6.png)
 
 #### 3-2. Code Highlights
 * **Fast Grid Bounding Box Reconstruction**:
@@ -306,6 +301,12 @@ Validates the Edge Impulse FOMO (Faster Objects, More Objects) model on the Etho
 
 #### 3-3. Console Output Logs
 Offloading the network to Ethos-U55 NPU decreases latency from 278 ms (CPU-only) down to **~5 ms on the NPU**, achieving smooth real-time object counting.
+
+##### FOMO Component Detection Demo Screen:
+* **Demo Video**: [YouTube Link (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
+
+![tron_fomo5](img/tron_fomo5.png)
+![tron_fomo6](img/tron_fomo6.png)
 ```text
 Start User-main program (FOMO Object Detection).
 Ethos-U55 NPU Driver opened successfully.
