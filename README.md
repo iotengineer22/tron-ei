@@ -301,3 +301,16 @@ for (int i = 1; i < WAVEFORM_POINTS; i++)
 }
 d2_renderline(d2_handle);
 ```
+
+---
+
+## 【参考・検証プログラム】
+
+### 4. FOMO基板部品検出 NPU高速版 (`tron_edge_fomo_npu_type`)
+* **概要**: 別部門（アプリケーション部門：`tron-npu`）にて開発された Ethos-U55 NPU 高速推論モデルの `tron-ei` 移植動作検証プログラムです。カメラ等の画像入力から基板上の電子部品を検出します（NPU動作確認済みの方はチェック不要です）。
+
+### 5. 3軸加速度センサー波形描画検証アプリ (`tron_i2c_d2_test`)
+* **概要**: MPU-6050 3軸加速度センサーからの連続入力を液晶画面にリアルタイムでオシロスコープ波形（Dave2D GPU）としてプロット描画する、ハードウェアおよび I2C 通信周りの検証用参考プログラムです。
+
+### 6. 音声キーワード認識 CPU推論版 (`tron_pdm_detect_cpu`)
+* **概要**: 音声キーワード認識 AI を、Ethos-U55 NPU アクセラレータを使わずに Cortex-M85 CPU単体（TensorFlow Lite for Microcontrollers の CPU カーネル実行）で動作させる比較検証用のプログラムです。

@@ -299,3 +299,16 @@ for (int i = 1; i < WAVEFORM_POINTS; i++)
 }
 d2_renderline(d2_handle);
 ```
+
+---
+
+## [Reference & Verification Programs]
+
+### 4. FOMO PCB Component Detector (NPU-accelerated) (`tron_edge_fomo_npu_type`)
+* **Description**: A porting verification project from the application division (`tron-npu`) to validate Ethos-U55 NPU operations. It classifies and localizes components on a PCB in real-time. (Check is optional if already verified in the NPU app repository).
+
+### 5. 3-axis Accelerometer Waveform Visualizer (`tron_i2c_d2_test`)
+* **Description**: A hardware validation sample that reads continuous data from the MPU-6050 accelerometer and plots the x/y/z waveform logs onto the LCD in real-time using Dave2D GPU line drawing.
+
+### 6. Voice Keyword Spotting CPU Baseline (`tron_pdm_detect_cpu`)
+* **Description**: A baseline comparison version of the Voice Keyword Spotting AI, running inference strictly on the Cortex-M85 CPU (using native TFLite Micro CPU kernels) without NPU hardware acceleration.
