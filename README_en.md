@@ -347,6 +347,10 @@ The AI applications (Audio, Motion Sensor, and Image) included in this repositor
 
 1. **Model Training & Retrieval (Edge Impulse)**:
    * By leveraging the **[Edge Impulse](https://www.edgeimpulse.com/)** platform, **advanced edge AI models including object detection (such as FOMO), voice keyword spotting, and motion gesture classification can be easily created and validated via a user-friendly web GUI.**
+   * **Training Datasets Used in This Project**:
+     * **PDM Microphone (Voice KWS)**: TFLite official [micro_speech train dataset](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech/train) (`up`, `down`, `right`, `left`, `noise`, etc.).
+     * **I2C Motion Sensor (Gesture)**: Custom motion data collected directly from target hardware via Edge Impulse (`Idle`, `Circle`, `Flick`, `Updown`, ~3 minutes each).
+     * **Camera (Board/Component Detection)**: Custom dataset capturing target boards and parts (`Pico`, `Xiao`, `nRF54L15`, `fpc`, ~40 images each).
    * Execute preprocessing (DSP), training, and full integer `int8` quantization on Edge Impulse Studio. Download the optimized model as a standard `.tflite` file.
 
    ##### Edge Impulse Model Retrieval Example:

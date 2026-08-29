@@ -349,6 +349,10 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 
 1. **Edge Impulse でのモデル開発と取得**:
    * **[Edge Impulse](https://www.edgeimpulse.com/)** プラットフォームを利用することで、**物体検出（FOMOなど）、音声認識、モーション検出（加速度ジェスチャなど）といった高度なエッジAIモデルを直観的なGUI上で簡単に作成・検証できます。**
+   * **本プロジェクトの学習データセット**：
+     * **PDMマイク (音声認識)**: tflite公式の [`up`, `down`, `right`, `left`, `noise` データ](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech/train) を使用。
+     * **I2Cセンサ (モーション検出)**: Edge Impulse を介し実機から収集したジェスチャデータ（`Idle`, `Circle`, `Flick`, `Updown` 各約3分間）を使用。
+     * **カメラ (基板・部品検出)**: 各種ボード・部品（`Pico`, `Xiao`, `nRF54L15`, `fpc`）の画像データ（各約40枚）を使用。
    * Edge Impulse Studio 上でデータの前処理、学習、および `int8` (8ビット符号付き整数) へのフル整数量子化を行い、学習済みモデルファイル（`*.tflite`）として直接ダウンロードします。
 
    ##### Edge Impulse でのモデル取得・ダウンロード例：
