@@ -331,3 +331,41 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 
 ### 6. Voice Keyword Spotting CPU Baseline (`tron_pdm_detect_cpu`)
 * **Description**: A baseline comparison version of the Voice Keyword Spotting AI, running inference strictly on the Cortex-M85 CPU (using native TFLite Micro CPU kernels) without NPU hardware acceleration.
+
+---
+
+## 8. References
+
+During the development of this project, the following official repositories and sample code were referenced:
+
+* **Real-time OS (μT-Kernel 3.0) Porting Base**:
+  * **[TRON Forum μT-Kernel 3.0 BSP2](https://github.com/tron-forum/mtk3_bsp2)** (GitHub) - Source of μT-Kernel 3.0 porting and task templates for EK-RA8P1.
+* **Edge Impulse SDK Core**:
+  * **[Edge Impulse C++ Inferencing SDK](https://github.com/edgeimpulse/inferencing-sdk-cpp)** (GitHub) - The primary target SDK for μT-Kernel integration.
+* **Peripherals (I2C / PDM / GLCDC / Dave2D / MIPI-CSI2)**:
+  * **[Renesas RA FSP Examples](https://github.com/renesas/ra-fsp-examples)** (GitHub) - Reference samples for `iic_master`, `pdm`, `glcdc`, `drw` (D/AVE 2D), and `mipi_csi`.
+* **Ethos-U55 NPU & TensorFlow Lite Micro Integration**:
+  * **[Renesas FSP (Flexible Software Package)](https://github.com/renesas/fsp)** (GitHub) - Arm Ethos-U55 NPU driver stack (`r_ethosu`) and TFLite Micro integrations.
+
+---
+
+## 9. Licenses
+
+This repository is distributed under a **multi-license (hybrid) scheme** due to third-party code inclusions:
+
+* **Custom Application Logic**: **MIT License**
+* **Real-time OS (μT-Kernel 3.0)**: **T-License 2.2** (TRON Forum)
+* **Board Support Package (FSP/BSP)**: **Renesas FSP Software License** (Renesas Electronics)
+* **Edge Impulse SDK & AI/ML Libraries**: **Apache License 2.0**
+* **Training Datasets (Roboflow 100)**: **CC BY 4.0** (Creative Commons Attribution 4.0)
+
+> [!IMPORTANT]
+> **Please refer to the [LICENSE.md](LICENSE.md) file in the repository root directory for full license texts, copyrights, and dataset credits.**
+
+---
+
+## 10. Acknowledgments
+
+We would like to express our deepest gratitude to the **TRON Forum** and **Renesas Electronics Corporation** for providing the state-of-the-art EK-RA8P1 evaluation boards, camera modules, and other development hardware, as well as organizing the TRON Programming Contest 2026.
+
+Porting the Edge Impulse SDK to the highly reliable and deterministic μT-Kernel 3.0 RTOS, and optimizing real-time edge AI pipelines utilizing hardware accelerators (Ethos-U55 NPU and Dave2D GPU), has been a deeply inspiring and rewarding experience. We hope this project contributes to the future growth of edge AI systems, real-time operating systems, and the embedded engineering community.

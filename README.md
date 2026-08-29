@@ -333,3 +333,41 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 
 ### 6. 音声キーワード認識 CPU推論版 (`tron_pdm_detect_cpu`)
 * **概要**: 音声キーワード認識 AI を、Ethos-U55 NPU アクセラレータを使わずに Cortex-M85 CPU単体（TensorFlow Lite for Microcontrollers の CPU カーネル実行）で動作させる比較検証用のプログラムです。
+
+---
+
+## 8. 参照サンプル・ライブラリ (References)
+
+本システムの開発にあたり、以下の公式サンプルプログラムおよびリポジトリを参照・活用しています。
+
+* **リアルタイムOS (μT-Kernel 3.0) 移植基盤**:
+  * **[TRON Forum μT-Kernel 3.0 BSP2](https://github.com/tron-forum/mtk3_bsp2)** (GitHub) - EK-RA8P1 向け μT-Kernel 3.0 移植および基本タスクテンプレートの参照元。
+* **Edge Impulse C++ SDK (移植対象)**:
+  * **[Edge Impulse C++ Inferencing SDK](https://github.com/edgeimpulse/inferencing-sdk-cpp)** (GitHub) - 移植元のエッジAI推論SDK。
+* **周辺ペリフェラル制御 (I2C / PDM / GLCDC / Dave2D / MIPI-CSI2)**:
+  * **[Renesas RA FSP Examples](https://github.com/renesas/ra-fsp-examples)** (GitHub) - `iic_master`, `pdm`, `glcdc`, `drw` (D/AVE 2D), `mipi_csi` サンプルプロジェクトの参照元。
+* **Arm Ethos-U55 NPU AI推論統合**:
+  * **[Renesas FSP (Flexible Software Package)](https://github.com/renesas/fsp)** (GitHub) - Arm Ethos-U55 NPU用ドライバスタック（`r_ethosu`）および TensorFlow Lite Micro 統合の参照元。
+
+---
+
+## 9. ソフトウェアライセンス (Licenses)
+
+本リポジトリに含まれるプログラムおよび学習モデルは、サードパーティ製のソフトウェアを内包しているため、コンポーネントごとに異なるライセンスが適用される**マルチ（ハイブリッド）ライセンス構成**となっております。
+
+* **独自開発アプリケーション部分**: **MIT License**
+* **リアルタイムOS (μT-Kernel 3.0)**: **T-License 2.2** (TRON Forum)
+* **ボードサポートパッケージ (FSP/BSP)**: **Renesas FSP Software License** (ルネサスエレクトロニクス)
+* **Edge Impulse SDK & 各種AI/MLライブラリ**: **Apache License 2.0**
+* **学習用データセット (Roboflow 100)**: **CC BY 4.0** (Creative Commons Attribution 4.0)
+
+> [!IMPORTANT]
+> 各ライセンスの許諾範囲、著作権表示、およびデータセットに関するクレジット表記などの**詳細につきましては、プロジェクトルートディレクトリに配置されている [LICENSE.md](LICENSE.md) ファイルをご参照ください。**
+
+---
+
+## 10. 謝辞 (Acknowledgments)
+
+本プロジェクトの開発および評価基板での実機デモンストレーションの構築にあたり、最新の高性能エッジマイコン「EK-RA8P1」や周辺モジュールなどの開発機材一式をご提供いただき、また技術的に極めて挑戦しがいのあるテーマでプログラミングコンテストを開催していただいた **トロンフォーラム（TRON Forum）**、および **ルネサスエレクトロニクス株式会社** の関係者の皆様に、心より感謝と御礼を申し上げます。
+
+μT-Kernel 3.0 という高い安定性とリアルタイム性を持つ国産OSの上で、Edge Impulse SDKのOSブリッジを構築し、最新のハードウェアアクセラレータ（Ethos-U55 NPUおよびDave2D GPU）を駆使したリアルタイムエッジAIプログラムを開発できたことは、組み込み開発の最前線における可能性を再認識する大変貴重で刺激的な経験となりました。本作品が今後のエッジAIシステムおよびリアルタイムOS技術の発展や、次世代の組み込みエンジニアリングの活性化に少しでも寄与できれば幸いです。
