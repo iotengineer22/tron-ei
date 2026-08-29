@@ -279,13 +279,21 @@ NN Result: flick (89.1%)
 
 ---
 
-### 3. PDM Mic Waveform Plotter (`tron_pdm_d2_test`)
+### 3. FOMO PCB Component Detector (NPU-accelerated) (`tron_edge_fomo_npu_type`)
 
 #### 3-1. Technical Details
-Uses Dave2D GPU vector commands to plot microphone audio waveforms (1024 points) onto the LCD panel in real-time.
+A porting verification project from the application division (`tron-npu`) to validate Ethos-U55 NPU operations. It classifies and localizes components on a PCB in real-time. (Check is optional if already verified in the NPU app repository).
 
 #### 3-2. Code Highlights
-Demonstrates GPU vector line segments drawing:
+Fetches image buffers (240x240 RGB) directly from the camera thread and offloads them to the NPU driver, achieving extremely fast inference in approximately 5 ms.
+
+---
+
+## [Reference & Verification Programs]
+
+### 4. PDM Mic Waveform Plotter (`tron_pdm_d2_test`)
+* **Description**: Uses Dave2D GPU vector commands to plot microphone audio waveforms (1024 points) onto the LCD panel in real-time.
+* **Code Highlights**: Demonstrates triple buffering and task synchronization via `tk_wup_tsk` on GLCDC Vblank vertical sync interrupt. Dave2D line draw API is leveraged for low-latency line rendering.
 ```cpp
 // Dave2D GPU real-time audio waveform plotter
 d2_setcolor(d2_handle, 0, 0xFF00FF00); // Set line color to Green
@@ -299,13 +307,6 @@ for (int i = 1; i < WAVEFORM_POINTS; i++)
 }
 d2_renderline(d2_handle);
 ```
-
----
-
-## [Reference & Verification Programs]
-
-### 4. FOMO PCB Component Detector (NPU-accelerated) (`tron_edge_fomo_npu_type`)
-* **Description**: A porting verification project from the application division (`tron-npu`) to validate Ethos-U55 NPU operations. It classifies and localizes components on a PCB in real-time. (Check is optional if already verified in the NPU app repository).
 
 ### 5. 3-axis Accelerometer Waveform Visualizer (`tron_i2c_d2_test`)
 * **Description**: A hardware validation sample that reads continuous data from the MPU-6050 accelerometer and plots the x/y/z waveform logs onto the LCD in real-time using Dave2D GPU line drawing.
