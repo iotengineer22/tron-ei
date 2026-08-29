@@ -346,6 +346,7 @@ During the development of this project, the following official repositories and 
   * **[Renesas RA FSP Examples](https://github.com/renesas/ra-fsp-examples)** (GitHub) - Reference samples for `iic_master`, `pdm`, `glcdc`, `drw` (D/AVE 2D), and `mipi_csi`.
 * **Ethos-U55 NPU & TensorFlow Lite Micro Integration**:
   * **[Renesas FSP (Flexible Software Package)](https://github.com/renesas/fsp)** (GitHub) - Arm Ethos-U55 NPU driver stack (`r_ethosu`) and TFLite Micro integrations.
+  * **[Renesas RUHMI Framework MCU](https://github.com/renesas/ruhmi-framework-mcu)** (GitHub) - Reference implementation patterns for integrating the Ethos-U software stack on Renesas MCUs.
 
 ---
 
