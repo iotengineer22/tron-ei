@@ -358,7 +358,7 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 * **独自開発アプリケーション部分**: **MIT License**
 * **リアルタイムOS (μT-Kernel 3.0)**: **T-License 2.2** (TRON Forum)
 * **ボードサポートパッケージ (FSP/BSP)**: **Renesas FSP Software License** (ルネサスエレクトロニクス)
-* **Edge Impulse SDK & 各種AI/MLライブラリ**: **Apache License 2.0**
+* **Edge Impulse SDK コア**: **BSD 3-Clause Clear** (一部サードパーティ製ライブラリに Apache 2.0 / BSD-3-Clause 等を含む)
 * **学習用データセット (Roboflow 100)**: **CC BY 4.0** (Creative Commons Attribution 4.0)
 
 > [!IMPORTANT]
