@@ -7,8 +7,9 @@ This folder aggregates and organizes the pre-built binary files (`.srec`) requir
 > * For verification work, you can use the **"EK-RA8P1 board with I2C accelerometer (MPU-6050) and wiring connected"** exactly as submitted to the contest office.
 > * When running **MPU-6050 accelerometer verification programs**, please ensure the accelerometer is correctly wired to Port 1 (3.3V, GND, Arduino Connector SCL, SDA) as shown below.
 > * When running **Digital Microphone (PDM) verification programs**, no external microphone or wiring is required since the board uses the **on-board MEMS digital microphone (SPH0641LM4H-1)**.
-> * When running **FOMO camera-based object detection**, connect the supplied MIPI-CSI2 camera module (OV5640) to the camera port.
+> * When running **FOMO camera-based object detection**, the camera module is already connected before shipping, so you can use it as is.
 >
+> ![EK-RA8P1 Evaluation Board](../img/EK-RA8P1.png)
 > ![Board with sensor connected](../img/EK-RA8P1_acc.jpg)
 
 ---
