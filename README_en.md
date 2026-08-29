@@ -85,7 +85,7 @@ The middleware targets the following hardware configuration:
 ## 4. Middleware Architecture
 
 ### 4-1. Edge Impulse Porting Layer (OS Bridge)
-Binds the following system features required by the Edge Impulse SDK to native μT-Kernel 3.0 APIs:
+Binds the following system features required by the official [Edge Impulse C++ Inferencing SDK (GitHub)](https://github.com/edgeimpulse/inferencing-sdk-cpp) to native μT-Kernel 3.0 APIs:
 * **Millisecond and Microsecond Timers**: Wraps system tick timer (`tk_get_tim`) and DWT (Data Watchpoint and Trace) cycle counters to provide microsecond-level execution timing.
 * **Dynamic Memory Management**: Maps dynamic allocation API (`malloc`/`free`) to thread-safe pools or custom heap structures.
 * **Serial Debug Console**: Routes Edge Impulse log outputs to T-Monitor CDC console serial interface.
@@ -104,10 +104,7 @@ Separates real-time sensor capturing from heavy AI neural networks and display u
 * **AI Inference Task (`task_3` / Priority 11)**:
   Runs classification using TensorFlow Lite Micro and Arm Ethos-U55 NPU driver. Set to a lower priority than UI/sampling tasks to guarantee zero packet drops.
 
-### 4-3. Atomic Buffer Protection
-To prevent race conditions between tasks, the middleware implements atomic data buffer updates using μT-Kernel dispatch lock APIs (`tk_dis_dsp` / `tk_ena_dsp`). This prevents data corruption while the AI task reads from high-frequency sensor buffers.
-
-### 4-4. Performance Boost: CPU vs Ethos-U55 NPU
+### 4-3. Performance Boost: CPU vs Ethos-U55 NPU
 To evaluate NPU performance gains, a baseline version running inference strictly on the Cortex-M85 CPU (via TFLite Micro CPU execution) was compiled and benchmarked against the NPU-accelerated firmware. (Note that for lightweight models like voice keyword spotting, the performance difference between CPU and NPU remains minimal, which aligns with our expectations.)
 
 * **AI Inference Speed Benchmark (CPU vs Ethos-U55 NPU)**:
