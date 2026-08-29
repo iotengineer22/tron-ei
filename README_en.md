@@ -336,24 +336,33 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 
 ## 7. Development Synergy & Time-to-Market (Edge Impulse × Renesas RUHMI)
 
-During the creation of this middleware and application suite, a powerful synergy was recognized between the **[Edge Impulse](https://www.edgeimpulse.com/)** development platform and the **[Renesas RUHMI Framework MCU](https://www.renesas.com/ja/software-tool/ruhmi-framework)** inference stack.
+During the creation of this middleware and application suite, a powerful synergy was recognized between the **[Edge Impulse](https://www.edgeimpulse.com/)** development platform, the **[Renesas RUHMI Framework MCU](https://www.renesas.com/ja/software-tool/ruhmi-framework)** inference stack, and the local **MERA Translator (AI Model Conversion Tool)**.
 
-Offloading and deploying manual models to the Ethos-U55 NPU typically involves tedious command-line compiler (Vela) setups, strict quantization configurations, and debugging unsupported operator faults—a process that often takes weeks or months.
+#### 7-1. Local Model Conversion Flow using MERA Translator
 
-The combined "Edge Impulse × Renesas RUHMI" pipeline accelerates development and lowers entry barriers through a clean division of labor:
+The AI applications (Audio, Motion Sensor, and Image) included in this repository are optimized and integrated onto the target platform (RA8 + μT-Kernel 3.0) via the following steps:
 
 ##### Platform Division of Labor & Pipeline Architecture:
 ![diagram_ruhmi_synergy_en](img/diagram_ruhmi_synergy_en.png)
 
+1. **Model Training & Retrieval (Edge Impulse)**:
+   * Execute preprocessing (DSP), training, and full integer `int8` quantization on Edge Impulse Studio. Download the optimized model as a standard `.tflite` file.
+2. **Local Model Conversion (MERA Translator)**:
+   * Place the `.tflite` model into the dedicated translation project folder under e² studio. Run the Renesas **MERA (Model Extension for Renesas Architecture) Translator**.
+   * The MERA compiler partitions the model into NPU (Ethos-U55) and CPU (fallback) subgraphs, generating NPU command arrays (`sub_0001_command_stream.c`), weight/bias arrays (`sub_0001_model_data.c`), and standard loading wrappers (`model.c` / `model.h`).
+3. **Firmware Integration (μT-Kernel 3.0)**:
+   * Copy the generated C source files directly into the project's `application/` folder.
+   * Call the clean MERA API **`RunModel(false)`** from the user application (`usermain.cpp`) to execute NPU inferences inside real-time RTOS tasks.
+
 ##### Development Platform Coverage & Benefits:
 ![table_ruhmi_synergy_en](img/table_ruhmi_synergy_en.png)
 
-* **Edge Impulse (Model Design & Automated NPU Compilation)**:
-  Handles dataset management, labeling, feature extraction (DSP), and model training entirely through an intuitive web GUI. It automatically verifies NPU operator compatibility and compiles the model using Vela in the cloud, exporting production-ready C++ classes in seconds.
-* **Renesas RUHMI / FSP (Hardware Infrastructure Protection & Abstraction)**:
-  Loads the exported model and secures low-level hardware dependencies—managing memory alignment, cache invalidations, and RTOS (μT-Kernel 3.0) task synchronization—and safely passes tensors to the physical Ethos-U55 NPU.
+* **Edge Impulse (Model Design & Preprocessing)**:
+  Provides a code-free web GUI for dataset management, DSP tuning, and quantization, exporting verified TFLite models with zero compiler conflicts.
+* **Renesas RUHMI / FSP / MERA (Local Optimization & Hardware Protection)**:
+  Converts standard TFLite models into highly efficient NPU binary commands, linking them with RTOS (μT-Kernel 3.0) tasks and peripherals while resolving critical low-level settings (memory alignment, cache synchronization).
 
-This platform synergy ensures that developers can **focus on rapid AI model iterations via Edge Impulse while relying on RUHMI/FSP to manage complex memory layouts and RTOS scheduling**, reducing time-to-market from months to days.
+This platform synergy ensures that developers can **focus on rapid AI model iterations via Edge Impulse while relying on RUHMI/FSP/MERA to manage complex memory layouts and RTOS scheduling**, reducing time-to-market from months to days.
 
 ---
 

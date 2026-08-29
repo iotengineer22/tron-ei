@@ -338,22 +338,31 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 
 ## 7. 開発プロセス短縮におけるプラットフォームシナジー (Edge Impulse × Renesas RUHMI)
 
-本統合ミドルウェアの開発にあたり、エッジAIプラットフォーム **「[Edge Impulse](https://www.edgeimpulse.com/)」** と、ルネサス公式のMCU向け推論スタック **「[Renesas RUHMI Framework MCU](https://www.renesas.com/ja/software-tool/ruhmi-framework)」** の間には、極めて強力な開発プロセス上の連携効果（シナジー）が存在します。
+本統合ミドルウェアの開発にあたり、エッジAIプラットフォーム **「[Edge Impulse](https://www.edgeimpulse.com/)」** と、ルネサス公式のMCU向け推論スタック **「[Renesas RUHMI Framework MCU](https://www.renesas.com/ja/software-tool/ruhmi-framework)」**、およびローカル変換ツール **「MERA Translator (AIモデル変換ツール)」** の間には、極めて強力な開発プロセス上の連携効果（シナジー）が存在します。
 
-手動で NPU（Ethos-U55）向けモデルをゼロから設計・量子化・コンパイルして実機へ実装するフローは、TensorFlowやVelaコンパイラのバージョン依存・非対応演算子のエラー等で数週間〜数ヶ月かかるケースが珍しくありません。
+#### 7-1. MERA Translator を用いたローカルモデル変換フロー
 
-これに対し、本プロジェクトで実証した「Edge Impulse × Renesas RUHMI」の構成は、以下の分業体制により、エッジAI開発の入門から製品化までの期間（Time-to-Market）を劇的に短縮します。
+本リポジトリに同梱されているAIアプリケーション（音声・加速度・画像）は、以下の手順でローカル環境での最適化および実機（RA8 + μT-Kernel 3.0）への統合が行われています。
 
 ##### プラットフォーム分業・推論パイプライン概念図：
 ![diagram_ruhmi_synergy_en](img/diagram_ruhmi_synergy_en.png)
 
+1. **Edge Impulse でのモデル開発と取得**:
+   * Edge Impulse Studio 上でデータの前処理、学習、および `int8` (8ビット符号付き整数) へのフル整数量子化を行い、学習済みモデルファイル（`*.tflite`）として直接ダウンロードします。
+2. **MERA Translator によるローカルモデル変換**:
+   * e² studio の AIモデル変換プロジェクト（ワークスペース）に `*.tflite` ファイルを配置し、ルネサス公式の **MERA (Model Extension for Renesas Architecture) Translator** を実行して変換を行います。
+   * MERAコンパイラは、TFLiteモデルを解析して NPU (Ethos-U55) 用のサブグラフと CPU (フォールバック) 用のサブグラフに分割し、NPU命令のコマンド配列（`sub_0001_command_stream.c`）や重みバイアス配列（`sub_0001_model_data.c`）、およびロード用の `model.c` / `model.h` を自動生成します。
+3. **μT-Kernel 3.0 実機プロジェクトへの取り込み**:
+   * 生成された軽量な C言語ソースファイル群（`.c` / `.h`）を、ファームウェアプロジェクトの `application/` フォルダ配下にコピーして統合します。
+   * アプリケーションコード（`usermain.cpp` 等）からは、MERA API である **`RunModel(false)`** を直接呼び出すことで、リアルタイムOSタスクからNPUを駆動します。
+
 ##### 開発プラットフォームの担当範囲と恩恵：
 ![table_ruhmi_synergy_en](img/table_ruhmi_synergy_en.png)
 
-* **Edge Impulse（モデル設計と自動NPUコンパイル）**:
-  ブラウザGUI上でデータ収集・ラベリングからモデル設計までを直観的に行い、NPUがサポートする演算子を自動検証しながら、クラウド上でVelaコンパイル済みの `.tflite` および推論用C++クラスをワンクリックで自動生成・エクスポートします。
-* **Renesas RUHMI / FSP（ハードウェアインフラの保護と抽象化）**:
-  Edge Impulseから出力されたモデルとコードを、RTOS（μT-Kernel 3.0）タスクやハードウェア周辺機能と繋ぎ、メモリアライメントやキャッシュ無効化などの低レイヤを最適化して安全にNPUへ橋渡しします。
+* **Edge Impulse（モデル設計とデータ処理）**:
+  ブラウザGUI上でデータ収集・ラベリングからモデル設計・量子化までを直観的に行い、NPUがサポートする演算子を自動検証して高品質な TFLite モデルを素早く取得します。
+* **Renesas RUHMI / FSP / MERA（ローカル最適変換とハードウェアインフラの保護）**:
+  ダウンロードしたモデルをローカルで高効率な NPU コマンドコードに変換し、RTOS（μT-Kernel 3.0）タスクや周辺機能と繋ぎ、メモリアライメントやキャッシュ無効化などの低レイヤを最適化して安全にNPUへ橋渡しします。
 
 このプラットフォームシナジーにより、**「本来組み込み開発で最もバグが生じやすい、低レイヤのメモリ管理とOS同期をRUHMI/FSPで守りながら、Edge Impulseで高品質なNPU対応AIモデルを数時間で製造して回す」**という、極めて高速かつ安全な開発サイクルを構築することが可能です。
 
