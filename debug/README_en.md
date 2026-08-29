@@ -15,21 +15,25 @@ This folder aggregates and organizes the pre-built binary files (`.srec`) requir
 
 ## 1. Directory Structure
 
-This folder contains the following 6 pre-built SREC binary files:
+The pre-built SREC files are organized as follows:
 
-* **Binary Files under `debug/`**:
+* **Directly under `debug/` (Main Programs)**:
+  These are the 3 main evaluation applications forming the core of the middleware library.
   * `tron_pdm_detect.srec` (Voice Keyword Spotting on NPU)
     * Listens to the on-board PDM microphone and uses the Ethos-U55 NPU to classify voice commands ("up", "down", "left", "right") with ultra-low latency.
-  * `tron_pdm_detect_cpu.srec` (Voice Keyword Spotting on CPU)
-    * Runs keyword spotting strictly on the Cortex-M85 CPU without NPU acceleration (for performance benchmark comparison).
   * `tron_i2c_detect.srec` (3-axis Accelerometer Gesture Recognition)
     * Uses 3-axis accelerometer data from the MPU-6050 to classify board motions into 4 dynamic gesture states ("wave", "snake", "updown", "idle").
-  * `tron_edge_fomo_npu_type.srec` (FOMO Component Detection on NPU)
-    * Identifies and counts tiny electronic components (Pico, Xiao, nRF54L15) on PCBs in real-time camera streams.
+  * `tron_pdm_detect_cpu.srec` (Voice Keyword Spotting on CPU)
+    * Runs keyword spotting strictly on the Cortex-M85 CPU without NPU acceleration (for comparison/validation).
+
+* **Under `base_firmware/` (Verification & Reference)**:
+  These 3 programs evaluate standalone peripheral features or provide a vision model porting reference. **Please flash and verify these components as needed.**
   * `tron_pdm_d2_test.srec` (PDM Mic Waveform Plotter)
     * Streams raw digital audio and plots real-time wave graphs and RMS volume onto the LCD using the Dave2D GPU engine.
   * `tron_i2c_d2_test.srec` (I2C Sensor Reading & 2D Graphics)
     * Captures accelerometer data and plots real-time X, Y, Z axes G-force wave graphs onto the LCD screen.
+  * `tron_edge_fomo_npu_type.srec` (FOMO Component Detection on NPU)
+    * Identifies and counts tiny electronic components (Pico, Xiao) on PCBs in real-time camera streams (provided as a porting reference).
 
 ---
 
@@ -53,7 +57,7 @@ The middleware features an **auto-detect scan logic** checking the WHO_AM_I regi
 
 ### ② PDM Digital Microphone
 * Captures digital audio using the standard MEMS mic (SPH0641LM4H-1) on the EK-RA8P1 board.
-* The middleware handles 32 kHz PDM acquisition and automatically down-samples the audio stream to 16 kHz inside the DMA interrupt context for AI inference (no external wiring needed).
+* The middleware handles 32 kHz PDM acquisition and down-samples the audio stream to 16 kHz inside the DMA interrupt context for AI inference (no external wiring needed).
 
 ### ③ MIPI-CSI2 Camera (OV5640)
 * Connect the supplied camera module to the MIPI-CSI2 camera connector on the back of the board before running camera-based AI applications.
@@ -105,7 +109,7 @@ Follow these steps to configure your project and flash target binary files.
 ### ③ Selecting Binary File (SREC)
 
 1. Click **[Browse...]** or double-click the empty file row in the center panel.
-2. Load the target **`.srec` file** (e.g., `tron_pdm_detect.srec`) from this `debug/` folder.
+2. Load the target **`.srec` file** (e.g., `tron_pdm_detect.srec` or `base_firmware/tron_pdm_d2_test.srec`) from this `debug/` folder.
 
 ![File Loaded Screen](../../tron-npu/img/tron_debug3.png)
 
@@ -186,19 +190,19 @@ Details and verification guidelines for each flashed SREC program:
   * Uses a bit-banged software I2C driver to establish communications on any GPIO ports.
   * Embeds a timing compensation algorithm to maintain a clean 104 Hz sampling rate under RTOS task execution.
 
-### ③ PDM Mic Waveform Plotter (`tron_pdm_d2_test.srec`)
+### ③ PDM Mic Waveform Plotter (`base_firmware/tron_pdm_d2_test.srec`)
 * **Operation & Demo**:
   * Speak or whistle near the microphone to watch the audio amplitude waveform (1024 data points) and RMS volume plot onto the LCD screen.
 * **Highlights**:
   * Decouples DMA completion events to feed UI rendering loops, guaranteeing tear-free display updates.
 
-### ④ I2C Sensor Reading & 2D Graphics (`tron_i2c_d2_test.srec`)
+### ④ I2C Sensor Reading & 2D Graphics (`base_firmware/tron_i2c_d2_test.srec`)
 * **Operation & Demo**:
   * Tilt and shake the accelerometer to watch live G-force wave plots (307 data points) for X (yellow), Y (red), and Z (blue) axes scroll across the LCD.
 * **Highlights**:
   * Blends a strict 104 Hz sampling task with optimized D/AVE 2D vector drawing commands.
 
-### ⑤ FOMO Component Detection on NPU (`tron_edge_fomo_npu_type.srec`)
+### ⑤ FOMO Component Detection on NPU (`base_firmware/tron_edge_fomo_npu_type.srec`)
 * **Operation & Demo**:
   * Point the camera at PCBs containing tiny components (Pico/Xiao boards).
   * The application identifies components and overlays colored label boxes and item counts onto the video stream.
