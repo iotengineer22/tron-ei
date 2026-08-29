@@ -281,7 +281,7 @@ NN Result: flick (89.1%)
 ### 3. FOMO PCB Component Detector (NPU-accelerated) (`tron_edge_fomo_npu_type`)
 
 #### 3-1. Technical Details
-Validates the Edge Impulse FOMO (Faster Objects, More Objects) model on the Ethos-U55 NPU to identify and locate multiple tiny electronic components (Pico, Xiao) on a PCB in real-time. (Check is optional if already verified in the NPU app repository).
+Validates the Edge Impulse FOMO (Faster Objects, More Objects) model on the Ethos-U55 NPU to identify and locate multiple tiny electronic components (Pico, Xiao) on a PCB in real-time. (This program is identical to the one documented in the application category repository: `tron-npu`).
 
 
 #### 3-2. Code Highlights

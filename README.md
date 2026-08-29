@@ -283,7 +283,7 @@ NN Result: flick (89.1%)
 ### 3. FOMO基板部品検出 NPU高速版 (`tron_edge_fomo_npu_type`)
 
 #### 3-1. 技術概要
-基板上の極小のチップ部品（Pico、Xiaoなど）やICなどの複数オブジェクトをリアルタイムに同時識別し、その数と位置を検出する Edge Impulse FOMO（Faster Objects, More Objects）モデルを Ethos-U55 NPU 上で動作検証します。（※別部門（アプリケーション部門：`tron-npu`）にて確認済みの場合はチェック不要です）。
+基板上の極小のチップ部品（Pico、Xiaoなど）やICなどの複数オブジェクトをリアルタイムに同時識別し、その数と位置を検出する Edge Impulse FOMO（Faster Objects, More Objects）モデルを Ethos-U55 NPU 上で動作検証します。（※別部門（アプリケーション部門：`tron-npu`）に記載したプログラムと同様の内容です）。
 
 
 #### 3-2. コードにおける重要ポイント
