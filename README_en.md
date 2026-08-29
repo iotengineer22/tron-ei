@@ -201,6 +201,8 @@ extern "C" void pdm_callback(pdm_callback_args_t *p_args)
 Initializes the Ethos-U55 NPU driver. Inference completes in **0.235 ms** (235 microseconds).
 
 ##### Voice Keyword Spotting Demo Screen:
+* **Demo Video**: [YouTube Link (https://youtu.be/TzLTbjDPGcE)](https://youtu.be/TzLTbjDPGcE)
+
 ![Real-time Audio Input Waveform](img/tron_pdm1.png)
 ![Keyword "up" Detected](img/tron_pdm4.png)
 ```text
@@ -260,6 +262,8 @@ tk_dly_tsk(sleep_time);
 Shows successful auto-detection on Port 1:
 
 ##### Gesture Recognition Demo Screen:
+* **Demo Video**: [YouTube Link (https://youtu.be/WUY36R_HQLQ)](https://youtu.be/WUY36R_HQLQ)
+
 ![Gesture "circle" Recognized](img/tron_i2c2.png)
 ![Gesture "updown" Recognized](img/tron_i2c4.png)
 ```text
