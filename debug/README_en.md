@@ -23,7 +23,7 @@ The pre-built SREC files are organized as follows:
   * `tron_pdm_detect.srec` (Voice Keyword Spotting on NPU)
     * Listens to the on-board PDM microphone and uses the Ethos-U55 NPU to classify voice commands ("up", "down", "left", "right") with ultra-low latency.
   * `tron_i2c_detect.srec` (3-axis Accelerometer Gesture Recognition)
-    * Uses 3-axis accelerometer data from the MPU-6050 to classify board motions into 4 dynamic gesture states ("wave", "snake", "updown", "idle").
+    * Uses 3-axis accelerometer data from the MPU-6050 to classify board motions into 4 dynamic gesture states ("idle", "circle", "flick", "updown").
   * `tron_edge_fomo_npu_type.srec` (FOMO Component Detection on NPU)
     * Identifies and counts tiny electronic components (Pico, Xiao, nRF54L15) on PCBs in real-time camera streams.
 
@@ -176,11 +176,11 @@ Details and verification guidelines for each flashed SREC program:
 ### ② Accelerometer Gesture Recognition AI (`tron_i2c_detect.srec`)
 * **Operation & Demo**:
   * Hold the EK-RA8P1 board (with MPU-6050 wired) and repeat the following dynamic gestures in the air:
-    * **`"wave"`**: Shake the board left-and-right rapidly (like waving goodbye).
+    * **`"circle"`**: Move the board in a circular motion in the air.
+    * **`"flick"`**: Quick and sharp flick motion.
     * **`"updown"`**: Shake the board up-and-down rapidly.
-    * **`"snake"`**: Move the board in a twisting, wavy snake-like trajectory.
     * **`"idle"`**: Place the board flat on the table and let it rest.
-  * The recognized motion class (e.g., `wave`) displays on the LCD screen along with real-time confidence scores.
+  * The recognized motion class (e.g., `circle`) displays on the LCD screen along with real-time confidence scores.
 * **Highlights**:
   * Uses a bit-banged software I2C driver to establish communications on GPIO ports.
   * Embeds a timing compensation algorithm to maintain a clean 104 Hz sampling rate under RTOS task execution.
@@ -210,4 +210,4 @@ Details and verification guidelines for each flashed SREC program:
 * **Operation & Demo**:
   * Works exactly as the NPU version, but executes inference strictly on the Cortex-M85 CPU without hardware acceleration.
 * **Highlights**:
-  * Flashing the CPU-only version increases inference latencies significantly (to several dozen/hundred milliseconds), showing the drastic power efficiency benefits of offloading to the hardware NPU.
+  * Flashing the CPU-only version increases inference latencies slightly (due to the lightweight nature of audio processing, running on the CPU does not cause a drastic increase, but it still shows the latency benefits of offloading to the NPU), showing the drastic power efficiency benefits of offloading to the hardware NPU.
