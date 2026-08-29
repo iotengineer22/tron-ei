@@ -348,6 +348,7 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 ![diagram_ruhmi_synergy_en](img/diagram_ruhmi_synergy_en.png)
 
 1. **Edge Impulse でのモデル開発と取得**:
+   * **[Edge Impulse](https://www.edgeimpulse.com/)** プラットフォームを利用することで、**物体検出（FOMOなど）、音声認識、モーション検出（加速度ジェスチャなど）といった高度なエッジAIモデルを直観的なGUI上で簡単に作成・検証できます。**
    * Edge Impulse Studio 上でデータの前処理、学習、および `int8` (8ビット符号付き整数) へのフル整数量子化を行い、学習済みモデルファイル（`*.tflite`）として直接ダウンロードします。
 2. **MERA Translator によるローカルモデル変換**:
    * e² studio の AIモデル変換プロジェクト（ワークスペース）に `*.tflite` ファイルを配置し、ルネサス公式の **MERA (Model Extension for Renesas Architecture) Translator** を実行して変換を行います。

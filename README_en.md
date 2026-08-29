@@ -346,6 +346,7 @@ The AI applications (Audio, Motion Sensor, and Image) included in this repositor
 ![diagram_ruhmi_synergy_en](img/diagram_ruhmi_synergy_en.png)
 
 1. **Model Training & Retrieval (Edge Impulse)**:
+   * By leveraging the **[Edge Impulse](https://www.edgeimpulse.com/)** platform, **advanced edge AI models including object detection (such as FOMO), voice keyword spotting, and motion gesture classification can be easily created and validated via a user-friendly web GUI.**
    * Execute preprocessing (DSP), training, and full integer `int8` quantization on Edge Impulse Studio. Download the optimized model as a standard `.tflite` file.
 2. **Local Model Conversion (MERA Translator)**:
    * Place the `.tflite` model into the dedicated translation project folder under e² studio. Run the Renesas **MERA (Model Extension for Renesas Architecture) Translator**.
