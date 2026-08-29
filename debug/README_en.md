@@ -172,6 +172,9 @@ Details and verification guidelines for each flashed SREC program:
 * **NPU Acceleration Details**:
   * MFCC audio feature extraction and classifier inference execute on the Ethos-U55 NPU in **~3 ms to 5 ms** (note that inference is performed using a 1-second audio data window).
   * By decoupling the DMA audio stream collection from the neural network task using μT-Kernel's task priority mechanisms, the audio stream remains smooth without packet dropouts.
+* **Demo Video**:
+  * [YouTube Link (https://youtu.be/TzLTbjDPGcE)](https://youtu.be/TzLTbjDPGcE)
+  [![Voice Keyword Spotting with Ethos-U55 NPU on RTOS](https://img.youtube.com/vi/TzLTbjDPGcE/hqdefault.jpg)](https://youtu.be/TzLTbjDPGcE)
 
 ### ② Accelerometer Gesture Recognition AI (`tron_i2c_detect.srec`)
 * **Operation & Demo**:
@@ -185,6 +188,9 @@ Details and verification guidelines for each flashed SREC program:
   * Uses a bit-banged software I2C driver to establish communications on GPIO ports.
   * Performs inference using a 2-second gesture data window (accelerometer readings) sampled at 104 Hz.
   * Embeds a timing compensation algorithm to maintain a clean 104 Hz sampling rate under RTOS task execution.
+* **Demo Video**:
+  * [YouTube Link (https://youtu.be/WUY36R_HQLQ)](https://youtu.be/WUY36R_HQLQ)
+  [![I2C Accelerometer Motion Detection on EK-RA8P1](https://img.youtube.com/vi/WUY36R_HQLQ/hqdefault.jpg)](https://youtu.be/WUY36R_HQLQ)
 
 ### ③ FOMO Component Detection on NPU (`tron_edge_fomo_npu_type.srec`)
 > [!NOTE]

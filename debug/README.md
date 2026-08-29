@@ -173,6 +173,9 @@ PCとボードを接続し、プロジェクトを作成してプログラムを
 * **特徴・性能比較**:
   * NPU（Ethos-U55）によって音声特徴抽出と推論を **約3ms〜5ms** という超低遅延で処理します（ただし、1秒間の音声データを使っての推論を行っています）。
   * 音声サンプリング用のDMA割り込み処理とAI推論タスクがμT-Kernelの優先度制御で完全に分離されているため、高負荷な推論中も「音飛び（フレーム欠損）」が発生しない高信頼なオーディオ処理を実現しています。
+* **実機デモ動画**:
+  * [YouTubeリンク (https://youtu.be/TzLTbjDPGcE)](https://youtu.be/TzLTbjDPGcE)
+  [![Voice Keyword Spotting with Ethos-U55 NPU on RTOS](https://img.youtube.com/vi/TzLTbjDPGcE/hqdefault.jpg)](https://youtu.be/TzLTbjDPGcE)
 
 ### ② 3軸加速度ジェスチャ認識エッジAI (`tron_i2c_detect.srec`)
 * **動作・デモ**:
@@ -186,6 +189,9 @@ PCとボードを接続し、プロジェクトを作成してプログラムを
   * GPIOピン制御によるソフトウェアI2Cで動作します。
   * 104Hzのサンプリング周波数で取得した2秒間のジェスチャー動作データを使って推論・識別処理を行います。
   * 加速度センサーの104Hz等間隔サンプリングを確実に行うための「周期ディレイ補正アルゴリズム」が組み込まれており、RTOSの時間管理ジッタを最小限に抑えています。
+* **実機デモ動画**:
+  * [YouTubeリンク (https://youtu.be/WUY36R_HQLQ)](https://youtu.be/WUY36R_HQLQ)
+  [![I2C Accelerometer Motion Detection on EK-RA8P1](https://img.youtube.com/vi/WUY36R_HQLQ/hqdefault.jpg)](https://youtu.be/WUY36R_HQLQ)
 
 ### ③ FOMO基板部品検出 NPU高速版 (`tron_edge_fomo_npu_type.srec`)
 > [!NOTE]
