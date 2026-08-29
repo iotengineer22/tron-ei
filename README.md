@@ -388,6 +388,7 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 * **リアルタイムOS (μT-Kernel 3.0) 移植基盤**:
   * **[TRON Forum μT-Kernel 3.0 BSP2](https://github.com/tron-forum/mtk3_bsp2)** (GitHub) - EK-RA8P1 向け μT-Kernel 3.0 移植および基本タスクテンプレートの参照元。
 * **Edge Impulse C++ SDK (移植対象)**:
+  * **[Edge Impulse 公式サイト](https://www.edgeimpulse.com/)** - AIモデル開発・データ管理用のエッジAIプラットフォーム。
   * **[Edge Impulse C++ Inferencing SDK](https://github.com/edgeimpulse/inferencing-sdk-cpp)** (GitHub) - 移植元のエッジAI推論SDK。
 * **周辺ペリフェラル制御 (I2C / PDM / GLCDC / Dave2D / MIPI-CSI2)**:
   * **[Renesas RA FSP Examples](https://github.com/renesas/ra-fsp-examples)** (GitHub) - `iic_master`, `pdm`, `glcdc`, `drw` (D/AVE 2D), `mipi_csi` サンプルプロジェクトの参照元。

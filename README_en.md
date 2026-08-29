@@ -386,6 +386,7 @@ During the development of this project, the following official repositories and 
 * **Real-time OS (μT-Kernel 3.0) Porting Base**:
   * **[TRON Forum μT-Kernel 3.0 BSP2](https://github.com/tron-forum/mtk3_bsp2)** (GitHub) - Source of μT-Kernel 3.0 porting and task templates for EK-RA8P1.
 * **Edge Impulse SDK Core**:
+  * **[Edge Impulse Official Website](https://www.edgeimpulse.com/)** - The official web platform for dataset management and model training.
   * **[Edge Impulse C++ Inferencing SDK](https://github.com/edgeimpulse/inferencing-sdk-cpp)** (GitHub) - The primary target SDK for μT-Kernel integration.
 * **Peripherals (I2C / PDM / GLCDC / Dave2D / MIPI-CSI2)**:
   * **[Renesas RA FSP Examples](https://github.com/renesas/ra-fsp-examples)** (GitHub) - Reference samples for `iic_master`, `pdm`, `glcdc`, `drw` (D/AVE 2D), and `mipi_csi`.
