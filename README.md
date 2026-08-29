@@ -353,6 +353,7 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 
    ##### Edge Impulse でのモデル取得・ダウンロード例：
    ![model1](img/model1.png)
+   ![model2](img/model2.png)
 
 2. **MERA Translator によるローカルモデル変換**:
    * e² studio の AIモデル変換プロジェクト（ワークスペース）に `*.tflite` ファイルを配置し、ルネサス公式の **MERA (Model Extension for Renesas Architecture) Translator** を実行して変換を行います。

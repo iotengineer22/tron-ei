@@ -351,6 +351,7 @@ The AI applications (Audio, Motion Sensor, and Image) included in this repositor
 
    ##### Edge Impulse Model Retrieval Example:
    ![model1](img/model1.png)
+   ![model2](img/model2.png)
 
 2. **Local Model Conversion (MERA Translator)**:
    * Place the `.tflite` model into the dedicated translation project folder under e² studio. Run the Renesas **MERA (Model Extension for Renesas Architecture) Translator**.
