@@ -345,10 +345,10 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 これに対し、本プロジェクトで実証した「Edge Impulse × Renesas RUHMI」の構成は、以下の分業体制により、エッジAI開発の入門から製品化までの期間（Time-to-Market）を劇的に短縮します。
 
 ##### プラットフォーム分業・推論パイプライン概念図：
-![diagram_ruhmi_synergy_ja](img/diagram_ruhmi_synergy_ja.png)
+![diagram_ruhmi_synergy_en](img/diagram_ruhmi_synergy_en.png)
 
 ##### 開発プラットフォームの担当範囲と恩恵：
-![table_ruhmi_synergy_ja](img/table_ruhmi_synergy_ja.png)
+![table_ruhmi_synergy_en](img/table_ruhmi_synergy_en.png)
 
 * **Edge Impulse（モデル設計と自動NPUコンパイル）**:
   ブラウザGUI上でデータ収集・ラベリングからモデル設計までを直観的に行い、NPUがサポートする演算子を自動検証しながら、クラウド上でVelaコンパイル済みの `.tflite` および推論用C++クラスをワンクリックで自動生成・エクスポートします。
