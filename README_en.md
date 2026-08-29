@@ -4,7 +4,17 @@
 
 This project is a high-performance **Edge AI Integration Middleware Library (TRON-EI)** running under the **μT-Kernel 3.0** real-time OS. It ports and integrates the inference SDK of the industry-standard edge AI platform, **Edge Impulse**, enabling seamless data capture, preprocessing, and real-time inference for image, audio, and motion sensor inputs.
 
-Developed as a submission for the **RTOS Middleware Category** of the TRON Programming Contest 2026.
+This is a development project for the **RTOS Middleware Category** of the TRON Programming Contest 2026.
+
+📄 **[日本語版 (README.md)](README.md)**
+
+---
+
+> [!IMPORTANT]
+> **Pre-built Binaries for Verification & Flashing Guide**
+> Pre-built SREC binary files for flashing and verification are located in the **[/debug](debug/)** folder.
+>
+> A comprehensive flashing manual containing step-by-step guides (including hardware connection specifications, troubleshooting screen freeze, flash memory initialization/erase, and serial logs verification) is located in **[/debug/README.md (Flashing Manual)](debug/README.md)**. Please refer to it when testing the projects.
 
 ---
 
