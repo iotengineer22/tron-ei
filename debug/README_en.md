@@ -23,17 +23,17 @@ The pre-built SREC files are organized as follows:
     * Listens to the on-board PDM microphone and uses the Ethos-U55 NPU to classify voice commands ("up", "down", "left", "right") with ultra-low latency.
   * `tron_i2c_detect.srec` (3-axis Accelerometer Gesture Recognition)
     * Uses 3-axis accelerometer data from the MPU-6050 to classify board motions into 4 dynamic gesture states ("wave", "snake", "updown", "idle").
-  * `tron_pdm_detect_cpu.srec` (Voice Keyword Spotting on CPU)
-    * Runs keyword spotting strictly on the Cortex-M85 CPU without NPU acceleration (for comparison/validation).
+  * `tron_edge_fomo_npu_type.srec` (FOMO Component Detection on NPU)
+    * Identifies and counts tiny electronic components (Pico, Xiao, nRF54L15) on PCBs in real-time camera streams.
 
 * **Under `base_firmware/` (Verification & Reference)**:
-  These 3 programs evaluate standalone peripheral features or provide a vision model porting reference. **Please flash and verify these components as needed.**
+  These 3 programs evaluate standalone peripheral features or compare CPU execution speeds. **Please flash and verify these components as needed.**
   * `tron_pdm_d2_test.srec` (PDM Mic Waveform Plotter)
     * Streams raw digital audio and plots real-time wave graphs and RMS volume onto the LCD using the Dave2D GPU engine.
   * `tron_i2c_d2_test.srec` (I2C Sensor Reading & 2D Graphics)
     * Captures accelerometer data and plots real-time X, Y, Z axes G-force wave graphs onto the LCD screen.
-  * `tron_edge_fomo_npu_type.srec` (FOMO Component Detection on NPU)
-    * Identifies and counts tiny electronic components (Pico, Xiao) on PCBs in real-time camera streams (provided as a porting reference).
+  * `tron_pdm_detect_cpu.srec` (Voice Keyword Spotting on CPU)
+    * Runs keyword spotting strictly on the Cortex-M85 CPU without NPU acceleration (for comparison/validation).
 
 ---
 
@@ -175,7 +175,7 @@ Details and verification guidelines for each flashed SREC program:
 * **NPU Acceleration Details**:
   * MFCC audio feature extraction and classifier inference execute on the Ethos-U55 NPU in **~3 ms to 5 ms**.
   * By decoupling the DMA audio stream collection from the neural network task using μT-Kernel's task priority mechanisms, the audio stream remains smooth without packet dropouts.
-* **CPU Comparison (`tron_pdm_detect_cpu.srec`)**:
+* **CPU Comparison (`base_firmware/tron_pdm_detect_cpu.srec`)**:
   * Flashing the CPU-only version increases inference latencies significantly (to several dozen/hundred milliseconds), showing the drastic power efficiency benefits of offloading to the hardware NPU.
 
 ### ② Accelerometer Gesture Recognition AI (`tron_i2c_detect.srec`)
@@ -202,7 +202,7 @@ Details and verification guidelines for each flashed SREC program:
 * **Highlights**:
   * Blends a strict 104 Hz sampling task with optimized D/AVE 2D vector drawing commands.
 
-### ⑤ FOMO Component Detection on NPU (`base_firmware/tron_edge_fomo_npu_type.srec`)
+### ⑤ FOMO Component Detection on NPU (`tron_edge_fomo_npu_type.srec`)
 * **Operation & Demo**:
   * Point the camera at PCBs containing tiny components (Pico/Xiao boards).
   * The application identifies components and overlays colored label boxes and item counts onto the video stream.
