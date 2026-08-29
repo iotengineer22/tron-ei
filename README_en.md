@@ -292,21 +292,7 @@ Fetches image buffers (240x240 RGB) directly from the camera thread and offloads
 ## [Reference & Verification Programs]
 
 ### 4. PDM Mic Waveform Plotter (`tron_pdm_d2_test`)
-* **Description**: Uses Dave2D GPU vector commands to plot microphone audio waveforms (1024 points) onto the LCD panel in real-time.
-* **Code Highlights**: Demonstrates triple buffering and task synchronization via `tk_wup_tsk` on GLCDC Vblank vertical sync interrupt. Dave2D line draw API is leveraged for low-latency line rendering.
-```cpp
-// Dave2D GPU real-time audio waveform plotter
-d2_setcolor(d2_handle, 0, 0xFF00FF00); // Set line color to Green
-d2_moveto(d2_handle, (d2_point)(0 << 4), (d2_point)((240 + (g_waveform_history[0] >> 6)) << 4));
-
-for (int i = 1; i < WAVEFORM_POINTS; i++)
-{
-    int screen_x = (i * DISPLAY_HSIZE_INPUT0) / WAVEFORM_POINTS;
-    int screen_y = 240 + (g_waveform_history[i] >> 6); // vertical scale
-    d2_lineto(d2_handle, (d2_point)(screen_x << 4), (d2_point)(screen_y << 4));
-}
-d2_renderline(d2_handle);
-```
+* **Description**: A real-time oscilloscope verification sample that uses Dave2D GPU vector commands to plot microphone audio waveforms (1024 points) onto the LCD panel with triple buffering and vertical sync task synchronization.
 
 ### 5. 3-axis Accelerometer Waveform Visualizer (`tron_i2c_d2_test`)
 * **Description**: A hardware validation sample that reads continuous data from the MPU-6050 accelerometer and plots the x/y/z waveform logs onto the LCD in real-time using Dave2D GPU line drawing.

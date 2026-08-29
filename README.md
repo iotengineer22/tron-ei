@@ -294,21 +294,7 @@ NN Result: flick (89.1%)
 ## 【参考・検証プログラム】
 
 ### 4. PDMデジタルマイク音声ビジュアライザ (`tron_pdm_d2_test`)
-* **概要**: オンボードPDMデジタルマイクから取得したリアルタイム音声波形（1024点）とRMS音量を、液晶画面へGPU（Dave2D）を用いてちらつきなく描画する、リアルタイムオシログラフデモです。
-* **コードの重要ポイント**: トリプルバッファリングとVblank垂直同期（60Hz）によるタスク同期を実装。Dave2Dによる高速波形プロット制御を行います。
-```cpp
-// Dave2Dによる高速音声波形ベクトルラインプロット処理
-d2_setcolor(d2_handle, 0, 0xFF00FF00); // 描画色：緑色
-d2_moveto(d2_handle, (d2_point)(0 << 4), (d2_point)((240 + (g_waveform_history[0] >> 6)) << 4));
-
-for (int i = 1; i < WAVEFORM_POINTS; i++)
-{
-    int screen_x = (i * DISPLAY_HSIZE_INPUT0) / WAVEFORM_POINTS;
-    int screen_y = 240 + (g_waveform_history[i] >> 6); // 縦方向スケール変換
-    d2_lineto(d2_handle, (d2_point)(screen_x << 4), (d2_point)(screen_y << 4));
-}
-d2_renderline(d2_handle);
-```
+* **概要**: オンボードPDMデジタルマイクから取得したリアルタイム音声波形（1024点）とRMS音量を、液晶画面へGPU（Dave2D）を用いてちらつきなく描画する、リアルタイムオシログラフ検証用参考プログラムです（トリプルバッファリングとVblank垂直同期によるタスク同期を実装）。
 
 ### 5. 3軸加速度センサー波形描画検証アプリ (`tron_i2c_d2_test`)
 * **概要**: MPU-6050 3軸加速度センサーからの連続入力を液晶画面にリアルタイムでオシロスコープ波形（Dave2D GPU）としてプロット描画する、ハードウェアおよび I2C 通信周りの検証用参考プログラムです。
