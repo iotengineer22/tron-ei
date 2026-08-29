@@ -106,11 +106,12 @@ Separates real-time sensor capturing from heavy AI neural networks and display u
 To prevent race conditions between tasks, the middleware implements atomic data buffer updates using μT-Kernel dispatch lock APIs (`tk_dis_dsp` / `tk_ena_dsp`). This prevents data corruption while the AI task reads from high-frequency sensor buffers.
 
 ### 4-4. Performance Boost: CPU vs Ethos-U55 NPU
-To evaluate NPU performance gains, a baseline version running inference strictly on the Cortex-M85 CPU (via TFLite Micro CPU execution) was compiled and benchmarked against the NPU-accelerated firmware.
+To evaluate NPU performance gains, a baseline version running inference strictly on the Cortex-M85 CPU (via TFLite Micro CPU execution) was compiled and benchmarked against the NPU-accelerated firmware. (Note that for lightweight models like voice keyword spotting, the performance difference between CPU and NPU remains minimal, which aligns with our expectations.)
 
 * **AI Inference Speed Benchmark (CPU vs Ethos-U55 NPU)**:
   * **Voice Keyword Spotting (1-second window)**: Shrunk from **0.596 ms** on the CPU to **0.235 ms on the NPU (2.5x Speedup)**.
   * **FOMO Object Detection (PCB Components)**: Shrunk from 278 ms on the CPU to **~5 ms on the NPU (55.6x Speedup)**.
+  * **3-axis Accelerometer Gesture Classifier**: Since the gesture recognition model is even lighter than the voice keyword spotting model, we did not execute CPU vs NPU comparison tests for this task, as no significant bottlenecks are expected.
 
 ![CPU vs NPU AI Inference Benchmark](img/cpu_vs_npu_comparison.png)
 
