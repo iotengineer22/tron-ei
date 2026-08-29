@@ -284,12 +284,43 @@ NN Result: flick (89.1%)
 ### 3. FOMO基板部品検出 NPU高速版 (`tron_edge_fomo_npu_type`)
 
 #### 3-1. 技術概要
-別部門（アプリケーション部門：`tron-npu`）にて開発された Ethos-U55 NPU 高速推論モデルの `tron-ei` 移植動作検証プログラムです。カメラ等の画像入力から基板上の電子部品をリアルタイム検出します（NPU動作確認済みの方はチェック不要です）。
+基板上の極小のチップ部品（Pico、Xiaoなど）やICなどの複数オブジェクトをリアルタイムに同時識別し、その数と位置を検出する Edge Impulse FOMO（Faster Objects, More Objects）モデルを Ethos-U55 NPU 上で動作検証します。（※別部門（アプリケーション部門：`tron-npu`）にて確認済みの場合はチェック不要です）。
+
+* **実機デモ動画**: [YouTubeリンク (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
+
+##### FOMO部品検出の実機動作画面：
+![tron_fomo5](img/tron_fomo5.png)
+![tron_fomo6](img/tron_fomo6.png)
 
 #### 3-2. コードにおける重要ポイント
-カメラ用スレッドから取得した画像バッファ（240x240 RGB）を直接 NPU ドライバへ渡し、約 5 ms という圧倒的な高速推論を実行します。
+* **高速グリッド処理**:
+  グリッドセルベースの検出モデル（FOMO）の出力テンソルから、ピーク確信度を持つセルを高速に抽出して座標にマッピングするポストプロセッサ（`fomo_postprocess`）を実装しています。
+* **メモリのキャッシュアライメント保護**:
+  キャッシュライン幅（32バイト）に合わせた `BSP_ALIGN_VARIABLE(32)` マクロによるテンソルメモリ領域の静的アライメント定義により、キャッシュ無効化（Cache Invalidate）による隣接メモリ汚染を完全に回避します。
+  ```cpp
+  // 96x96 座標系から 800x600 液晶表示スケールへの座標変換 (スケール値 = 6.25f)
+  float fx = (float)g_ai_detection[i].m_x * 6.25f + 212.0f;
+  float fy = (float)g_ai_detection[i].m_y * 6.25f;
+  
+  // 検出した部品名と確信度の文字列表示
+  sprintf(val_str, "%s: %d%%", pcb_class_names[g_ai_detection[i].m_class], g_ai_detection[i].m_val_percent);
+  ```
 
----
+#### 3-3. 実行時のシリアル出力ログ例
+NPUへ推論処理をオフロードすることで、CPU単体での実行（約 278 ms）に比べて圧倒的に高速な **5 ms** で推論完了し、リアルタイム部品カウントを完全同期で達成しています。
+```text
+Start User-main program (FOMO Object Detection).
+Ethos-U55 NPU Driver opened successfully.
+Start camera capturing...
+MIPI CSI-2 camera initialized.
+
+[AI Inference] Running FOMO object detector...
+Inference timing: 5 ms.
+Components Detected: Xiao (x:12, y:20, 94%), Pico (x:45, y:55, 91%)
+[AI Inference] Running FOMO object detector...
+Inference timing: 5 ms.
+Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
+```
 
 ## 【参考・検証プログラム】
 

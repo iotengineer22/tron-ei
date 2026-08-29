@@ -282,12 +282,43 @@ NN Result: flick (89.1%)
 ### 3. FOMO PCB Component Detector (NPU-accelerated) (`tron_edge_fomo_npu_type`)
 
 #### 3-1. Technical Details
-A porting verification project from the application division (`tron-npu`) to validate Ethos-U55 NPU operations. It classifies and localizes components on a PCB in real-time. (Check is optional if already verified in the NPU app repository).
+Validates the Edge Impulse FOMO (Faster Objects, More Objects) model on the Ethos-U55 NPU to identify and locate multiple tiny electronic components (Pico, Xiao) on a PCB in real-time. (Check is optional if already verified in the NPU app repository).
+
+* **Demo Video**: [YouTube Link (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
+
+##### FOMO Component Detection Demo Screen:
+![tron_fomo5](img/tron_fomo5.png)
+![tron_fomo6](img/tron_fomo6.png)
 
 #### 3-2. Code Highlights
-Fetches image buffers (240x240 RGB) directly from the camera thread and offloads them to the NPU driver, achieving extremely fast inference in approximately 5 ms.
+* **Fast Grid Bounding Box Reconstruction**:
+  Implements a grid-cell based postprocessor (`fomo_postprocess`) that maps peak confidence cells to screen coordinates.
+* **Cache Alignment Protection**:
+  Applies static cache alignment utilizing `BSP_ALIGN_VARIABLE(32)` on tensor arenas to secure memory boundaries and prevent adjacent memory pollution during cache invalidations.
+  ```cpp
+  // Map 96x96 grid coordinates to 800x600 LCD screen coordinates (Scale factor = 6.25f)
+  float fx = (float)g_ai_detection[i].m_x * 6.25f + 212.0f;
+  float fy = (float)g_ai_detection[i].m_y * 6.25f;
+  
+  // Format detected class name and confidence value
+  sprintf(val_str, "%s: %d%%", pcb_class_names[g_ai_detection[i].m_class], g_ai_detection[i].m_val_percent);
+  ```
 
----
+#### 3-3. Console Output Logs
+Offloading the network to Ethos-U55 NPU decreases latency from 278 ms (CPU-only) down to **~5 ms on the NPU**, achieving smooth real-time object counting.
+```text
+Start User-main program (FOMO Object Detection).
+Ethos-U55 NPU Driver opened successfully.
+Start camera capturing...
+MIPI CSI-2 camera initialized.
+
+[AI Inference] Running FOMO object detector...
+Inference timing: 5 ms.
+Components Detected: Xiao (x:12, y:20, 94%), Pico (x:45, y:55, 91%)
+[AI Inference] Running FOMO object detector...
+Inference timing: 5 ms.
+Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
+```
 
 ## [Reference & Verification Programs]
 
