@@ -338,7 +338,7 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 
 ## 7. 開発プロセス短縮におけるプラットフォームシナジー (Edge Impulse × Renesas RUHMI)
 
-本統合ミドルウェアの開発にあたり、エッジAIプラットフォーム **「Edge Impulse」** と、ルネサス公式のMCU向け推論スタック **「Renesas RUHMI Framework MCU」** の間には、極めて強力な開発プロセス上の連携効果（シナジー）が存在します。
+本統合ミドルウェアの開発にあたり、エッジAIプラットフォーム **「[Edge Impulse](https://www.edgeimpulse.com/)」** と、ルネサス公式のMCU向け推論スタック **「[Renesas RUHMI Framework MCU](https://www.renesas.com/ja/software-tool/ruhmi-framework)」** の間には、極めて強力な開発プロセス上の連携効果（シナジー）が存在します。
 
 手動で NPU（Ethos-U55）向けモデルをゼロから設計・量子化・コンパイルして実機へ実装するフローは、TensorFlowやVelaコンパイラのバージョン依存・非対応演算子のエラー等で数週間〜数ヶ月かかるケースが珍しくありません。
 

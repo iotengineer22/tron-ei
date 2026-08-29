@@ -336,7 +336,7 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 
 ## 7. Development Synergy & Time-to-Market (Edge Impulse × Renesas RUHMI)
 
-During the creation of this middleware and application suite, a powerful synergy was recognized between the **Edge Impulse** development platform and the **Renesas RUHMI Framework MCU** inference stack.
+During the creation of this middleware and application suite, a powerful synergy was recognized between the **[Edge Impulse](https://www.edgeimpulse.com/)** development platform and the **[Renesas RUHMI Framework MCU](https://www.renesas.com/ja/software-tool/ruhmi-framework)** inference stack.
 
 Offloading and deploying manual models to the Ethos-U55 NPU typically involves tedious command-line compiler (Vela) setups, strict quantization configurations, and debugging unsupported operator faults—a process that often takes weeks or months.
 
