@@ -41,16 +41,12 @@ The pre-built SREC files are organized as follows:
 
 The middleware automatically detects sensor ports and drives peripherals as follows:
 
-### ① MPU-6050 Accelerometer (I2C) Port Allocation
-The middleware features an **auto-detect scan logic** checking the WHO_AM_I register on startup. It automatically initializes the sensor on the first active port discovered:
+### ① MPU-6050 Accelerometer (I2C) Port Connection
+The middleware automatically establishes communications on the GPIO pins where the sensor is connected. On the submitted board, the sensor is wired as follows:
 
-| Active Port (Scan Order) | Physical Connector Location | SCL Pin | SDA Pin |
-| :--- | :--- | :---: | :---: |
-| **PORT 1 (Recommended / Submitted)** | **Arduino Connector SCL/SDA** | **`P100`** | **`P101`** |
-| **PORT 2** | Internal GPIO Header | `P206` | `P205` |
-| **PORT 3** | **PMOD2** Connector | `P112` | `P113` |
-| **PORT 4** | **PMOD1** Connector | `P102` | `P103` |
-
+* **Signal Wiring**:
+  * Sensor **`SCL`** ➡ Board **`P100`** (Arduino Connector SCL)
+  * Sensor **`SDA`** ➡ Board **`P101`** (Arduino Connector SDA)
 * **Power Wiring**:
   * Sensor **`VCC`** ➡ Board **`3.3V`** Pin
   * Sensor **`GND`** ➡ Board **`GND`** Pin
@@ -175,8 +171,6 @@ Details and verification guidelines for each flashed SREC program:
 * **NPU Acceleration Details**:
   * MFCC audio feature extraction and classifier inference execute on the Ethos-U55 NPU in **~3 ms to 5 ms**.
   * By decoupling the DMA audio stream collection from the neural network task using μT-Kernel's task priority mechanisms, the audio stream remains smooth without packet dropouts.
-* **CPU Comparison (`base_firmware/tron_pdm_detect_cpu.srec`)**:
-  * Flashing the CPU-only version increases inference latencies significantly (to several dozen/hundred milliseconds), showing the drastic power efficiency benefits of offloading to the hardware NPU.
 
 ### ② Accelerometer Gesture Recognition AI (`tron_i2c_detect.srec`)
 * **Operation & Demo**:
@@ -187,14 +181,17 @@ Details and verification guidelines for each flashed SREC program:
     * **`"idle"`**: Place the board flat on the table and let it rest.
   * The recognized motion class (e.g., `wave`) displays on the LCD screen along with real-time confidence scores.
 * **Highlights**:
-  * Uses a bit-banged software I2C driver to establish communications on any GPIO ports.
+  * Uses a bit-banged software I2C driver to establish communications on GPIO ports.
   * Embeds a timing compensation algorithm to maintain a clean 104 Hz sampling rate under RTOS task execution.
 
-### ③ PDM Mic Waveform Plotter (`base_firmware/tron_pdm_d2_test.srec`)
+### ③ FOMO Component Detection on NPU (`tron_edge_fomo_npu_type.srec`)
 * **Operation & Demo**:
-  * Speak or whistle near the microphone to watch the audio amplitude waveform (1024 data points) and RMS volume plot onto the LCD screen.
+  * Point the camera at PCBs containing tiny components (Pico/Xiao boards).
+  * The application identifies components and overlays colored label boxes and item counts onto the video stream.
 * **Highlights**:
-  * Decouples DMA completion events to feed UI rendering loops, guaranteeing tear-free display updates.
+  * Accelerates inference from 278 ms on the CPU to **~5 ms on the NPU**, ensuring responsive multi-object counting.
+* **Demo Video**:
+  * [YouTube Link (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
 
 ### ④ I2C Sensor Reading & 2D Graphics (`base_firmware/tron_i2c_d2_test.srec`)
 * **Operation & Demo**:
@@ -202,9 +199,14 @@ Details and verification guidelines for each flashed SREC program:
 * **Highlights**:
   * Blends a strict 104 Hz sampling task with optimized D/AVE 2D vector drawing commands.
 
-### ⑤ FOMO Component Detection on NPU (`tron_edge_fomo_npu_type.srec`)
+### ⑤ PDM Mic Waveform Plotter (`base_firmware/tron_pdm_d2_test.srec`)
 * **Operation & Demo**:
-  * Point the camera at PCBs containing tiny components (Pico/Xiao boards).
-  * The application identifies components and overlays colored label boxes and item counts onto the video stream.
-* **Demo Video**:
-  * [YouTube Link (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
+  * Speak or whistle near the microphone to watch the audio amplitude waveform (1024 data points) and RMS volume plot onto the LCD screen.
+* **Highlights**:
+  * Decouples DMA completion events to feed UI rendering loops, guaranteeing tear-free display updates.
+
+### ⑥ Voice Keyword Spotting on CPU (`base_firmware/tron_pdm_detect_cpu.srec`)
+* **Operation & Demo**:
+  * Works exactly as the NPU version, but executes inference strictly on the Cortex-M85 CPU without hardware acceleration.
+* **Highlights**:
+  * Flashing the CPU-only version increases inference latencies significantly (to several dozen/hundred milliseconds), showing the drastic power efficiency benefits of offloading to the hardware NPU.
