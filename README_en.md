@@ -1,6 +1,6 @@
-# Edge Impulse Integration Middleware Library for μT-Kernel 3.0 (TRON-EI)
+# Edge Impulse Integration Middleware Library for μT-Kernel 3.0
 
-This project is a high-performance **Edge AI Integration Middleware Library (TRON-EI)** running under the **μT-Kernel 3.0** real-time OS. It ports and integrates the inference SDK of the industry-standard edge AI platform, **Edge Impulse**, enabling seamless data capture, preprocessing, and real-time inference for image, audio, and motion sensor inputs.
+This project is a high-performance **Edge AI Integration Middleware Library** running under the **μT-Kernel 3.0** real-time OS. It ports and integrates the inference SDK of the industry-standard edge AI platform, **Edge Impulse**, enabling seamless data capture, preprocessing, and real-time inference for image, audio, and motion sensor inputs.
 
 Developed as a development project for the **RTOS Middleware Category** of the TRON Programming Contest 2026.
 
