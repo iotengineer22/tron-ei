@@ -126,7 +126,7 @@ tron-ei/
 | フォルダ名 | アプリケーションの役割 | 使用エンジン (AI / 描画 / センサー) |
 | :--- | :--- | :--- |
 | **[tron_pdm_detect](src/tron_pdm_detect)** | 音声キーワード認識 NPU高速版 | **Ethos-U55 NPU** / PDMマイク (32kHz) |
-| **[tron_i2c_detect](src/tron_i2c_detect)** | 3軸加速度ジェスチャ認識エッジAI | **Ethos-U55 NPU (MERA)** / MPU-6050 (Software I2C) |
+| **[tron_i2c_detect](src/tron_i2c_detect)** | 3軸加速度ジェスチャ認識エッジAI | **Ethos-U55 NPU** / MPU-6050 (Software I2C) |
 | **[tron_edge_fomo_npu_type](src/tron_edge_fomo_npu_type)** | FOMO基板部品検出 NPU高速版 | **Ethos-U55 NPU** / MIPIカメラ |
 
 **デモ動画:**

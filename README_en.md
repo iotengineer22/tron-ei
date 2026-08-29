@@ -124,7 +124,7 @@ Core demonstration programs showing the capabilities of the ported NPU and SDK.
 | Project Directory | Peripheral & Model | Acceleration Engine |
 | :--- | :--- | :--- |
 | **[tron_pdm_detect](src/tron_pdm_detect)** | Voice Keyword Spotting (NPU version) | **Ethos-U55 NPU** / PDM Digital Mic |
-| **[tron_i2c_detect](src/tron_i2c_detect)** | 3-axis Accelerometer Gesture Classifier | **Ethos-U55 NPU (MERA)** / MPU-6050 Accelerometer |
+| **[tron_i2c_detect](src/tron_i2c_detect)** | 3-axis Accelerometer Gesture Classifier | **Ethos-U55 NPU** / MPU-6050 Accelerometer |
 | **[tron_edge_fomo_npu_type](src/tron_edge_fomo_npu_type)** | FOMO Component Detection | **Ethos-U55 NPU** / MIPI-CSI2 Camera |
 
 **Demo Videos:**
