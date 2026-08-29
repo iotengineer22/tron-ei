@@ -44,7 +44,7 @@ tron-ei/
 * **「NPUアクセラレータ上での推論のバックグラウンド実行（優先度低）」**
 を完全に分離・並行駆動させるプロデューサー・コンシューマー設計を採用しています。これにより、極めて安定したリアルタイムマルチセンサーAI認識システムを実証しました。
 
-![加速度センサー接続状態のボード外観](img/EK-RA8P1_acc.jpg)
+![加速度センサー接続状態のボード外観](img/tron_i2c3.png)
 
 ---
 
@@ -62,7 +62,7 @@ tron-ei/
 * **外部メモリ**: SDRAM 32MB（トリプルバッファおよびNPUテンソル領域に使用）
 
 ##### ハードウェア・ブロック構成:
-![Hardware Block Diagram](../tron-npu/img/Hardware_Block.png)
+![Hardware Block Diagram](img/hadware_block_i2c_pdm.png)
 
 ##### EK-RA8P1 評価ボード外観:
 ![EK-RA8P1 評価ボード](img/EK-RA8P1.png)
@@ -143,10 +143,7 @@ Edge Impulse が要求する以下のシステム機能を、μT-Kernel 3.0 の�
 | **[tron_i2c_d2_test](src/tron_i2c_d2_test)** | 3軸加速度センサー高速ビジュアライザ | Dave2D / MPU-6050 (Software I2C) |
 | **[tron_pdm_detect_cpu](src/tron_pdm_detect_cpu)** | 音声キーワード認識 CPU通常版 | TFLite Micro (CPU) / PDMマイク (32kHz) |
 
-**デモ動画 (ビジュアライザ):**
-| ③ PDMデジタルマイク音声ビジュアライザ | ④ 3軸加速度センサー高速ビジュアライザ |
-| :---: | :---: |
-| [YouTubeリンク (https://youtu.be/D8z67i30WcM)](https://youtu.be/D8z67i30WcM)<br><br>[![PDM Mic Waveform Plotter](https://img.youtube.com/vi/D8z67i30WcM/hqdefault.jpg)](https://youtu.be/D8z67i30WcM) | [YouTubeリンク (https://youtu.be/WUY36R_HQLQ)](https://youtu.be/WUY36R_HQLQ)<br><br>[![I2C Sensor Reading](https://img.youtube.com/vi/WUY36R_HQLQ/hqdefault.jpg)](https://youtu.be/WUY36R_HQLQ) |
+
 
 ---
 

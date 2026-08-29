@@ -44,7 +44,7 @@ Using the priority-based preemptive scheduling of μT-Kernel 3.0, this middlewar
 * **"Background NPU Inference execution (Lowest Priority)"**
 These are completely isolated and run in parallel, demonstrating a highly stable and real-time multi-sensor AI recognition system.
 
-![Board with sensor connected](img/EK-RA8P1_acc.jpg)
+![Board with sensor connected](img/tron_i2c3.png)
 
 ---
 
@@ -62,7 +62,7 @@ The middleware targets the following hardware configuration:
 * **External RAM**: 32MB SDRAM (used for Triple Buffering and NPU Tensor Arena)
 
 ##### Hardware Block Diagram:
-![Hardware Block Diagram](../tron-npu/img/Hardware_Block.png)
+![Hardware Block Diagram](img/hadware_block_i2c_pdm.png)
 
 ##### EK-RA8P1 Evaluation Board Layout:
 ![EK-RA8P1 Evaluation Board Layout](img/EK-RA8P1.png)
@@ -141,10 +141,7 @@ Helper applications used to verify peripheral operations or benchmark CPU perfor
 | **[tron_i2c_d2_test](src/tron_i2c_d2_test)** | Accelerometer Waveform Plotter | Dave2D GPU / MPU-6050 (Soft I2C) |
 | **[tron_pdm_detect_cpu](src/tron_pdm_detect_cpu)** | Voice Keyword Spotting (CPU baseline) | Cortex-M85 CPU / PDM Digital Mic |
 
-**Demo Videos (Visualizers):**
-| ③ PDM Mic Waveform Plotter | ④ I2C Sensor Reading & 2D Graphics |
-| :---: | :---: |
-| [YouTube Link (https://youtu.be/D8z67i30WcM)](https://youtu.be/D8z67i30WcM)<br><br>[![PDM Mic Waveform Plotter](https://img.youtube.com/vi/D8z67i30WcM/hqdefault.jpg)](https://youtu.be/D8z67i30WcM) | [YouTube Link (https://youtu.be/WUY36R_HQLQ)](https://youtu.be/WUY36R_HQLQ)<br><br>[![I2C Sensor Reading](https://img.youtube.com/vi/WUY36R_HQLQ/hqdefault.jpg)](https://youtu.be/WUY36R_HQLQ) |
+
 
 ---
 
