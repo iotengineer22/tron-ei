@@ -176,10 +176,10 @@ Details and verification guidelines for each flashed SREC program:
 ### ② Accelerometer Gesture Recognition AI (`tron_i2c_detect.srec`)
 * **Operation & Demo**:
   * Hold the EK-RA8P1 board (with MPU-6050 wired) and repeat the following dynamic gestures in the air:
+    * **`"idle"`**: Place the board flat on the table and let it rest.
     * **`"circle"`**: Move the board in a circular motion in the air.
     * **`"flick"`**: Quick and sharp flick motion.
     * **`"updown"`**: Shake the board up-and-down rapidly.
-    * **`"idle"`**: Place the board flat on the table and let it rest.
   * The recognized motion class (e.g., `circle`) displays on the LCD screen along with real-time confidence scores.
 * **Highlights**:
   * Uses a bit-banged software I2C driver to establish communications on GPIO ports.
