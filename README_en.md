@@ -23,7 +23,6 @@ tron-ei/
 │   └── ...                              (3 Visualizers and CPU-only Baseline Projects)
 │
 ├── debug/                               (Pre-built SREC Binaries & Flashing Manual)
-│   └── base_firmware/                   (Verification & Reference Binaries)
 ├── img/                                 (Manuals & Document Image Assets)
 ├── LICENSE.md                           (Software License & Citation Credits)
 └── README.md                            (This document)
