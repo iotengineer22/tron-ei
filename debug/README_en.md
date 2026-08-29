@@ -46,8 +46,8 @@ The middleware automatically detects sensor ports and drives peripherals as foll
 The middleware automatically establishes communications on the GPIO pins where the sensor is connected. On the submitted board, the sensor is wired as follows:
 
 * **Signal Wiring**:
-  * Sensor **`SCL`** ➡ Board **`P100`** (Arduino Connector SCL)
-  * Sensor **`SDA`** ➡ Board **`P101`** (Arduino Connector SDA)
+  * Sensor **`SCL`** ➡ Board **`SCL`** (Arduino Connector J24-10)
+  * Sensor **`SDA`** ➡ Board **`SDA`** (Arduino Connector J24-9)
 * **Power Wiring**:
   * Sensor **`VCC`** ➡ Board **`3.3V`** Pin
   * Sensor **`GND`** ➡ Board **`GND`** Pin
