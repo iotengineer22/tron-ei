@@ -90,6 +90,48 @@ Edge Impulse が要求する以下のシステム機能を、μT-Kernel 3.0 の�
 * **動的メモリ管理**: μT-Kernelのメモリプール管理、またはスレッドセーフな `malloc`/`free` マッピングの定義。
 * **シリアルデバッグ統合**: T-Monitor の `tm_printf`/`tm_putstring` によるシリアルコンソールロギングの統合。
 
+```mermaid
+graph TD
+    %% スタイルクラス定義
+    classDef sdk fill:#ffeedd,stroke:#ffaa66,stroke-width:2px;
+    classDef bridge fill:#ddffdd,stroke:#66cc66,stroke-width:2px;
+    classDef os fill:#ddeeff,stroke:#66aacc,stroke-width:2px;
+    classDef hw fill:#ffdddd,stroke:#cc6666,stroke-width:2px;
+
+    subgraph Edge_Impulse_Core [Edge Impulse C++ SDK (プラットフォーム独立)]
+        SDK_Core[推論コア / DSP前処理]:::sdk --> Port_H[ei_classifier_porting.h <br> (抽象インターフェース)]:::sdk
+    end
+
+    subgraph OS_Bridge [ポーティングレイヤー / OSブリッジ (usermain.cppにて実装)]
+        MS_Timer[ei_read_timer_ms<br>ミリ秒測定]:::bridge
+        US_Timer[ei_read_timer_us<br>マイクロ秒測定]:::bridge
+        Sleep_Func[ei_sleep<br>タスク遅延]:::bridge
+        Log_Func[ei_printf / ei_putchar<br>ログ出力]:::bridge
+        Mem_Func[ei_malloc / ei_free<br>メモリ管理]:::bridge
+    end
+
+    subgraph Platform_Target [μT-Kernel 3.0 RTOS / EK-RA8P1物理レイヤー]
+        TK_GetTim[tk_get_tim API]:::os
+        TK_DlyTsk[tk_dly_tsk API]:::os
+        T_Monitor[T-Monitor / vprintf <br> (シリアルデバッグ)]:::os
+        C_Malloc[スレッドセーフなHeap領域<br>標準Cランタイム]:::os
+        DWT_Reg[DWT サイクルカウンタ <br> Cortex-M85 ハードウェアレジスタ]:::hw
+    end
+
+    %% 接続関係
+    Port_H -->|コール| MS_Timer
+    Port_H -->|コール| US_Timer
+    Port_H -->|コール| Sleep_Func
+    Port_H -->|コール| Log_Func
+    Port_H -->|コール| Mem_Func
+
+    MS_Timer -->|OS時刻取得| TK_GetTim
+    Sleep_Func -->|タスク休止| TK_DlyTsk
+    Log_Func -->|UART出力| T_Monitor
+    Mem_Func -->|動的メモリ確保| C_Malloc
+    US_Timer -->|CPUクロック直読| DWT_Reg
+```
+
 ### 4-2. 非同期センサーサンプリング＆推論パイプライン（プロデューサー・コンシューマー）
 データの取りこぼしが許されない高精度なデータ収集と、重いAI推論・描画を非同期かつ安全に並行処理するためのマルチタスク用ミドルウェアフレームワークを提供します。
 

@@ -90,6 +90,48 @@ Binds the following system features required by the Edge Impulse SDK to native Î
 * **Dynamic Memory Management**: Maps dynamic allocation API (`malloc`/`free`) to thread-safe pools or custom heap structures.
 * **Serial Debug Console**: Routes Edge Impulse log outputs to T-Monitor CDC console serial interface.
 
+```mermaid
+graph TD
+    %% Style Class Definition
+    classDef sdk fill:#ffeedd,stroke:#ffaa66,stroke-width:2px;
+    classDef bridge fill:#ddffdd,stroke:#66cc66,stroke-width:2px;
+    classDef os fill:#ddeeff,stroke:#66aacc,stroke-width:2px;
+    classDef hw fill:#ffdddd,stroke:#cc6666,stroke-width:2px;
+
+    subgraph Edge_Impulse_Core [Edge Impulse C++ SDK (Platform Independent)]
+        SDK_Core[Inference Core / DSP Preprocessing]:::sdk --> Port_H[ei_classifier_porting.h <br> (Abstract Interface)]:::sdk
+    end
+
+    subgraph OS_Bridge [Porting Layer / OS Bridge (Implemented in usermain.cpp)]
+        MS_Timer[ei_read_timer_ms<br>Millisecond Time]:::bridge
+        US_Timer[ei_read_timer_us<br>Microsecond Time]:::bridge
+        Sleep_Func[ei_sleep<br>Task Delay]:::bridge
+        Log_Func[ei_printf / ei_putchar<br>Console Logging]:::bridge
+        Mem_Func[ei_malloc / ei_free<br>Memory Management]:::bridge
+    end
+
+    subgraph Platform_Target [Î¼T-Kernel 3.0 RTOS / EK-RA8P1 Hardware]
+        TK_GetTim[tk_get_tim API]:::os
+        TK_DlyTsk[tk_dly_tsk API]:::os
+        T_Monitor[T-Monitor / vprintf <br> (Serial Debug)]:::os
+        C_Malloc[Thread-Safe Heap <br> Standard C Library]:::os
+        DWT_Reg[DWT Cycle Counter <br> Cortex-M85 Hardware Register]:::hw
+    end
+
+    %% Wiring / Calls
+    Port_H -->|call| MS_Timer
+    Port_H -->|call| US_Timer
+    Port_H -->|call| Sleep_Func
+    Port_H -->|call| Log_Func
+    Port_H -->|call| Mem_Func
+
+    MS_Timer -->|Get OS Time| TK_GetTim
+    Sleep_Func -->|Task Sleep| TK_DlyTsk
+    Log_Func -->|UART Output| T_Monitor
+    Mem_Func -->|Heap Allocation| C_Malloc
+    US_Timer -->|Direct Cycle Read| DWT_Reg
+```
+
 ### 4-2. Asynchronous Sampling & Inference Pipeline (Producer-Consumer)
 Separates real-time sensor capturing from heavy AI neural networks and display updates using multi-task concurrency.
 
