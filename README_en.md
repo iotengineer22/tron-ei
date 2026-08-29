@@ -151,6 +151,9 @@ Helper applications used to verify peripheral operations or benchmark CPU perfor
 #### 1-1. Technical Details
 Captures digital audio from the on-board PDM microphone at 32 kHz. In the DMA interrupt context, the raw data is immediately down-sampled to 16 kHz. A 1-second sliding window runs through the Ethos-U55 NPU to identify keywords (`up`, `down`, `left`, `right`, `noise`).
 
+##### Voice Keyword Spotting Inference Pipeline:
+![diagram_pdm_detect_flow](img/diagram_pdm_detect_flow.png)
+
 #### 1-2. Code Highlights
 Shows the down-sampling algorithm inside `pdm_callback`. Sign-extends 20-bit raw PCM inputs from 32-bit registers and normalizes the signal to a 16-bit range before placing it in the 16 kHz circular buffer.
 ```cpp
@@ -222,6 +225,9 @@ NN Result: down (88.7%)
 
 #### 2-1. Technical Details
 Uses bit-banged software I2C to read from the MPU-6050. Using a 2-second time-series buffer sampled at 104 Hz, it classifies motions into 4 dynamic gesture states (`idle`, `circle`, `flick`, `updown`).
+
+##### Accelerometer Sampling & Inference Pipeline:
+![diagram_i2c_detect_flow](img/diagram_i2c_detect_flow.png)
 
 #### 2-2. Code Highlights
 Bypasses hardware I2C peripheral pin limitations using software I2C. Includes scan logic looking for MPU-6050 on the pins (PORT 1: SCL=P100 / SDA=P101).
