@@ -170,7 +170,7 @@ Details and verification guidelines for each flashed SREC program:
   * Speak English keywords **`"up"`, `"down"`, `"left"`, `"right"`** clearly toward the board.
   * Upon detection, the recognized word and confidence rating (%) show up at the center of the display (ambient noises filter out as `"noise"`).
 * **NPU Acceleration Details**:
-  * MFCC audio feature extraction and classifier inference execute on the Ethos-U55 NPU in **~3 ms to 5 ms**.
+  * MFCC audio feature extraction and classifier inference execute on the Ethos-U55 NPU in **~3 ms to 5 ms** (note that inference is performed using a 1-second audio data window).
   * By decoupling the DMA audio stream collection from the neural network task using μT-Kernel's task priority mechanisms, the audio stream remains smooth without packet dropouts.
 
 ### ② Accelerometer Gesture Recognition AI (`tron_i2c_detect.srec`)
@@ -183,9 +183,13 @@ Details and verification guidelines for each flashed SREC program:
   * The recognized motion class (e.g., `circle`) displays on the LCD screen along with real-time confidence scores.
 * **Highlights**:
   * Uses a bit-banged software I2C driver to establish communications on GPIO ports.
+  * Performs inference using a 2-second gesture data window (accelerometer readings) sampled at 104 Hz.
   * Embeds a timing compensation algorithm to maintain a clean 104 Hz sampling rate under RTOS task execution.
 
 ### ③ FOMO Component Detection on NPU (`tron_edge_fomo_npu_type.srec`)
+> [!NOTE]
+> This application is also presented as a main project in the application category ([tron-npu](../../tron-npu/)). If you have already verified it in that category, no separate verification is required here.
+>
 * **Operation & Demo**:
   * Point the camera at PCBs containing tiny components (Pico/Xiao boards).
   * The application identifies components and overlays colored label boxes and item counts onto the video stream.
@@ -193,6 +197,7 @@ Details and verification guidelines for each flashed SREC program:
   * Accelerates inference from 278 ms on the CPU to **~5 ms on the NPU**, ensuring responsive multi-object counting.
 * **Demo Video**:
   * [YouTube Link (https://youtu.be/_uKRamoLaNA)](https://youtu.be/_uKRamoLaNA)
+  [![PCB Object Detection using Ethos-U55 NPU](https://img.youtube.com/vi/_uKRamoLaNA/hqdefault.jpg)](https://youtu.be/_uKRamoLaNA)
 
 ### ④ I2C Sensor Reading & 2D Graphics (`base_firmware/tron_i2c_d2_test.srec`)
 * **Operation & Demo**:
