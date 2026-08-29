@@ -334,6 +334,23 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
 
 ---
 
+## 7. Development Synergy & Time-to-Market (Edge Impulse × Renesas RUHMI)
+
+During the creation of this middleware and application suite, a powerful synergy was recognized between the **Edge Impulse** development platform and the **Renesas RUHMI Framework MCU** inference stack.
+
+Offloading and deploying manual models to the Ethos-U55 NPU typically involves tedious command-line compiler (Vela) setups, strict quantization configurations, and debugging unsupported operator faults—a process that often takes weeks or months.
+
+The combined "Edge Impulse × Renesas RUHMI" pipeline accelerates development and lowers entry barriers through a clean division of labor:
+
+* **Edge Impulse (Model Design & Automated NPU Compilation)**:
+  Handles dataset management, labeling, feature extraction (DSP), and model training entirely through an intuitive web GUI. It automatically verifies NPU operator compatibility and compiles the model using Vela in the cloud, exporting production-ready C++ classes in seconds.
+* **Renesas RUHMI / FSP (Hardware Infrastructure Protection & Abstraction)**:
+  Loads the exported model and secures low-level hardware dependencies—managing memory alignment, cache invalidations, and RTOS (μT-Kernel 3.0) task synchronization—and safely passes tensors to the physical Ethos-U55 NPU.
+
+This platform synergy ensures that developers can **focus on rapid AI model iterations via Edge Impulse while relying on RUHMI/FSP to manage complex memory layouts and RTOS scheduling**, reducing time-to-market from months to days.
+
+---
+
 ## 8. References
 
 During the development of this project, the following official repositories and sample code were referenced:
