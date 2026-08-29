@@ -352,7 +352,6 @@ Components Detected: Xiao (x:12, y:20, 96%), Pico (x:45, y:55, 92%)
    * Edge Impulse Studio 上でデータの前処理、学習、および `int8` (8ビット符号付き整数) へのフル整数量子化を行い、学習済みモデルファイル（`*.tflite`）として直接ダウンロードします。
 
    ##### Edge Impulse でのモデル取得・ダウンロード例：
-   ![model1](img/model1.png)
    ![model2](img/model2.png)
 
 2. **MERA Translator によるローカルモデル変換**:

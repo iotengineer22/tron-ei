@@ -350,7 +350,6 @@ The AI applications (Audio, Motion Sensor, and Image) included in this repositor
    * Execute preprocessing (DSP), training, and full integer `int8` quantization on Edge Impulse Studio. Download the optimized model as a standard `.tflite` file.
 
    ##### Edge Impulse Model Retrieval Example:
-   ![model1](img/model1.png)
    ![model2](img/model2.png)
 
 2. **Local Model Conversion (MERA Translator)**:
