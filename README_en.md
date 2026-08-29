@@ -199,6 +199,10 @@ extern "C" void pdm_callback(pdm_callback_args_t *p_args)
 
 #### 1-3. Console Output Logs
 Initializes the Ethos-U55 NPU driver. Inference completes in **0.235 ms** (235 microseconds).
+
+##### Voice Keyword Spotting Demo Screen:
+![Real-time Audio Input Waveform](img/tron_pdm1.png)
+![Keyword "up" Detected](img/tron_pdm4.png)
 ```text
 Start User-main program (Voice Spotting via Ethos-U55 NPU).
 Initializing Ethos-U55 NPU...
@@ -254,6 +258,10 @@ tk_dly_tsk(sleep_time);
 
 #### 2-4. Console Output Logs
 Shows successful auto-detection on Port 1:
+
+##### Gesture Recognition Demo Screen:
+![Gesture "circle" Recognized](img/tron_i2c2.png)
+![Gesture "updown" Recognized](img/tron_i2c4.png)
 ```text
 Start User-main program (Gesture Classification).
 [MPU-6050 Auto-Detect] Active port: PORT 1 (Arduino SCL/SDA)

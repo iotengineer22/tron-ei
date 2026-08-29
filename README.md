@@ -201,6 +201,10 @@ extern "C" void pdm_callback(pdm_callback_args_t *p_args)
 
 #### 1-3. 実行時のシリアル出力ログ例
 起動時に Ethos-U55 NPUドライバが初期化され、NPUによる推論時間がわずか **0.235 ms**（235マイクロ秒）で完了していることが確認できます。
+
+##### 音声キーワード認識の実機動作画面：
+![マイク入力波形のリアルタイム表示](img/tron_pdm1.png)
+![キーワード "up" 検出時の画面表示](img/tron_pdm4.png)
 ```text
 Start User-main program (Voice Spotting via Ethos-U55 NPU).
 Initializing Ethos-U55 NPU...
@@ -256,6 +260,10 @@ tk_dly_tsk(sleep_time);
 
 #### 2-4. 実行時のシリアル出力ログ例
 加速度センサーがポート1で自動検出され、2秒間のデータが蓄積され次第、推論が安定して実行されていることがログから確認できます。
+
+##### 加速度ジェスチャ認識の実機動作画面：
+![ジェスチャ動作 "circle" 判定時の画面表示](img/tron_i2c2.png)
+![ジェスチャ動作 "updown" 判定時の画面表示](img/tron_i2c4.png)
 ```text
 Start User-main program (Gesture Classification).
 [MPU-6050 Auto-Detect] Active port: PORT 1 (Arduino SCL/SDA)
